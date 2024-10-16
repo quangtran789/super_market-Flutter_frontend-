@@ -1,0 +1,50 @@
+name: app_supermarket
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+
+dependencies:
+  badges: ^3.1.2
+  carousel_slider: ^5.0.0
+  cupertino_icons: ^1.0.8
+  flutter:
+    sdk: flutter
+  flutter_facebook_auth: ^7.1.1
+  flutter_slidable: ^3.1.1
+  flutter_svg: ^2.0.10+1
+  get: ^4.6.6
+
+  hexcolor: ^3.0.1
+  http: ^1.2.2
+  iconly: ^1.0.1
+  image_picker: ^1.1.2
+  provider: ^6.1.2
+  rive_animated_icon: ^2.0.1
+  salomon_bottom_bar: ^3.3.2
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Jaldi
+      fonts:
+        - asset: fonts/Jaldi-Bold.ttf
+          weight: 700 # Chỉ định weight cho Bold
+        - asset: fonts/Jaldi-Regular.ttf
+          weight: 400 # Chỉ định weight cho Regular
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter_18pt-Regular.ttf
+          weight: 400
