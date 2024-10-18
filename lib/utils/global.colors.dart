@@ -33,26 +33,5 @@ class GlobalVariables {
     'https://img.freepik.com/free-photo/front-view-delicious-shrimps_23-2148393704.jpg?t=st=1728917052~exp=1728920652~hmac=bff81ad069d5a534858dd5b667ce2637a58c8dbc6deb4cdd3ea8ced29ca77c83&w=996',
   ];
 
-  static const List<Map<String, String>> categoryImages = [
-    {
-      'title': 'Hoa tươi',
-      'image': 'assets/images/ornamental-cabbage.png',
-    },
-    {
-      'title': 'Hoa khô',
-      'image': 'assets/images/flower.png',
-    },
-    {
-      'title': 'Hạt giống',
-      'image': 'assets/images/fruit-tree.png',
-    },
-    {
-      'title': 'Chậu hoa',
-      'image': 'assets/images/flower (1).png',
-    },
-    {
-      'title': 'Hoa sự kiện',
-      'image': 'assets/images/mandala.png',
-    },
-  ];
+  
 }

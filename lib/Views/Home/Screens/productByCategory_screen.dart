@@ -88,7 +88,7 @@ class _ProductbycategoryScreenState extends State<ProductbycategoryScreen> {
                         ),
                       ),
                       title: Text(
-                        product.name,
+                        product.name.split(' ').take(2).join(' '),
                         style:
                             const TextStyle(fontFamily: 'Jaldi', fontSize: 20),
                       ),

@@ -1,5 +1,6 @@
 import 'package:app_supermarket/Views/Cart/Screens/cart_screen.dart';
 import 'package:app_supermarket/Views/Home/Screens/home.dart';
+import 'package:app_supermarket/Views/Profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -54,9 +55,7 @@ class _HomepageState extends State<Homepage> {
       child: Text("hff"),
     ),
     CartScreen(),
-    Center(
-      child: Text("hff"),
-    ),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

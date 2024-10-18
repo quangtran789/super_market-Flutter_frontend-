@@ -124,7 +124,7 @@ class ProductService {
 
   // Xóa sản phẩm
   Future<void> deleteProduct(String id) async {
-    final url = '$baseUrl/products/$id'; // Xác định URL
+    final url = '$baseUrl/$id'; // Xác định URL
     final response = await http.delete(Uri.parse(url));
 
     if (response.statusCode != 200) {

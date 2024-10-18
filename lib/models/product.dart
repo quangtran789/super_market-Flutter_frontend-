@@ -52,4 +52,8 @@ class Product {
 
   // Chuyển đổi Product thành JSON để gửi đi
   String toJson() => json.encode(toMap());
+  @override
+  String toString() {
+    return 'Product(id: $id, name: $name, description: $description, price: $price, quantity: $quantity, categoryId: $categoryId, imageUrl: $imageUrl)';
+  }
 }

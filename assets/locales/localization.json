@@ -1,0 +1,35 @@
+{
+    "en": {
+      "welcome": "Welcome",
+      "hello": "What do you want to buy today?",
+      "home": "Home",
+      "Yêu thích": "Wish",
+      "Giỏ hàng": "Cart",
+      "Cá nhân": "Profile"
+    },
+    "ja": {
+      "welcome": "いらっしゃいませ",
+      "hello": "今日は何を買いたいですか？",
+      "home": "家",
+      "Yêu thích": "願い",
+      "Giỏ hàng": "カート",
+      "Cá nhân": "個人"
+    },
+    "th": {
+      "welcome": "สวัสดี",
+      "hello": "วันนี้คุณต้องการซื้ออะไร?",
+      "home": "หน้าแรก",
+      "Yêu thích": "ที่ชื่นชอบ",
+      "Giỏ hàng": "ตะกร้าสินค้า",
+      "Cá nhân": "รายบุคคล"
+    },
+    "vi": {
+      "welcome": "Xin chào",
+      "hello": "Bạn muốn mua gì hôm nay?",
+      "home": "Trang chủ",
+      "Yêu thích": "Yêu thích",
+      "Giỏ hàng": "Giỏ hàng",
+      "Cá nhân": "Cá nhân"
+    }
+  }
+  

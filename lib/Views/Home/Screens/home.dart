@@ -23,7 +23,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
   List<Category> categories = [];
   final CategoryService categoryService = CategoryService();
   final TextEditingController searchController = TextEditingController();
@@ -31,8 +30,6 @@ class _HomeState extends State<Home> {
   List<Product> productList = [];
   bool isLoading = true;
   String selectedCategoryId = '';
-
-  
 
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -110,7 +107,6 @@ class _HomeState extends State<Home> {
       userName = storedName ?? 'Người dùng';
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -118,37 +114,33 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  'Xin chào, $userName',
-                  style: const TextStyle(
-                      fontSize: 25,
-                      fontFamily: 'Jaldi',
-                      fontWeight: FontWeight.w400),
-                ),
-                const Text(
-                  'Bạn muốn mua gì hôm nay?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
+          title: Column(
+            children: [
+              Text(
+                'Xin chào, $userName',
+                style: const TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Jaldi',
+                    fontWeight: FontWeight.w400),
+              ),
+              const Text(
+                'Bạn muốn mua gì hôm nay?',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              ),
+            ],
           ),
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
-              onPressed: logout, // Gọi hàm đăng xuất
+              onPressed: logout,
             ),
             IconButton(
               icon: const Icon(Icons.admin_panel_settings),
-              onPressed: navigateToAdmin, // Gọi hàm điều hướng
+              onPressed: navigateToAdmin,
             ),
           ],
         ),
         body: SingleChildScrollView(
-          // Thêm SingleChildScrollView bao quanh toàn bộ nội dung
           child: Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 15.0),
             child: Column(
@@ -217,87 +209,90 @@ class _HomeState extends State<Home> {
                         )
                       : const Center(child: Text('Không có danh mục nào')),
                 ),
-
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 const CarouselImage(),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 // Product list section
                 isLoading
-                    ? const Center(
-                        child:
-                            CircularProgressIndicator()) // Hiển thị vòng tròn tải
+                    ? const Center(child: CircularProgressIndicator())
                     : productList.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true, // Để danh sách sản phẩm cuộn được
-                            itemCount: productList.length,
-                            itemBuilder: (context, index) {
-                              final product = productList[index];
+                        ? Column(
+                            children: productList.map((product) {
                               return ListTile(
                                 leading: Container(
                                   width: 70,
                                   height: 70,
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(8), // Bo góc
+                                    borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: Colors.black26, // Màu viền đen
-                                      width: 2, // Độ dày của viền
+                                      color: Colors.black26,
+                                      width: 2,
                                     ),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                        8), // Bo góc cho hình ảnh
+                                    borderRadius: BorderRadius.circular(8),
                                     child: Image.network(
-                                      product
-                                          .imageUrl, // Đường dẫn ảnh của sản phẩm
+                                      product.imageUrl,
                                       width: 50,
                                       height: 50,
                                       fit: BoxFit.cover,
                                       errorBuilder:
                                           (context, error, stackTrace) {
                                         return const Icon(Icons.broken_image,
-                                            size:
-                                                50); // Icon khi không tải được ảnh
+                                            size: 50);
                                       },
                                     ),
                                   ),
                                 ),
-                                title: Text(
-                                  product.name,
-                                  style: const TextStyle(
-                                      fontFamily: 'Jaldi', fontSize: 20),
-                                ),
-                                subtitle: Text('Giá: ${product.price} VND'),
-                                trailing: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProductDetailScreen(
-                                                product: product),
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      product.name.split(' ').take(2).join(' '),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
                                       ),
-                                    );
-                                  },
-                                  style: TextButton.styleFrom(
-                                    foregroundColor:
-                                        Colors.blue, // Màu của chữ nút
-                                  ),
-                                  child: const Text('Xem Thông Tin'),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            'Giá: ${product.price} VND',
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductDetailScreen(
+                                                        product: product),
+                                              ),
+                                            );
+                                          },
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors.blue,
+                                          ),
+                                          child: const Text('Xem Thông Tin'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               );
-                            },
+                            }).toList(),
                           )
-                        : const Center(child: Text('Không có sản phẩm nào')),
+                        : const Center(
+                            child: Text('Không có sản phẩm nào'),
+                          ),
               ],
             ),
           ),
         ),
-        
       ),
     );
   }
