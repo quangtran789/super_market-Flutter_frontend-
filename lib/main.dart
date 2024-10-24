@@ -11,8 +11,6 @@ void main() async {
   String? email = prefs.getString('email'); // Lấy email từ SharedPreferences
   String? role = prefs.getString('role'); // Lấy vai trò từ SharedPreferences
   runApp(MainApp(isLoggedIn: email != null, role: role));
-
-  
 }
 
 class MainApp extends StatelessWidget {

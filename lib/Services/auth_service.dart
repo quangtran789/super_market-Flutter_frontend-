@@ -40,6 +40,8 @@ class AuthService {
       // Nếu đăng nhập thành công, lưu thông tin vào SharedPreferences
       final data = jsonDecode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      
+      await prefs.setString('userId', data['_id']); // Lưu userId
       await prefs.setString('email', data['email']);
       await prefs.setString('name', data['name']); // Lưu tên người dùng
       await prefs.setString('role', data['role']); // Lưu vai trò
@@ -51,5 +53,23 @@ class AuthService {
       print('Login failed: ${errorData['message']}'); // In ra thông báo lỗi
       return false; // Đăng nhập không thành công
     }
+  }
+
+  Future<String?> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId'); // Trả về userId từ SharedPreferences
+  }
+
+  // Lấy tên người dùng
+  Future<String?> getUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('name'); // Trả về tên người dùng từ SharedPreferences
+  }
+
+  // Kiểm tra trạng thái đăng nhập
+  Future<bool> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    return token != null; // Trả về true nếu có token
   }
 }

@@ -16,6 +16,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
+  static const String routeName = '/home';
   const Home({super.key});
 
   @override

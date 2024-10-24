@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/product.dart';
+import 'package:app_supermarket/models/cart.dart'; // Import CartItem model
+import 'package:app_supermarket/Views/Cart/Services/cart_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;
@@ -10,13 +13,12 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.name ??
-            'Product Details'), // Kiểm tra nếu tên sản phẩm null
+        title: Text(product.name ?? 'Product Details'),
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              // Chức năng thêm vào giỏ hàng
+              // Thực hiện chức năng thêm vào giỏ hàng
               _addToCart(context);
             },
           ),
@@ -30,24 +32,20 @@ class ProductDetailScreen extends StatelessWidget {
             children: [
               // Hình ảnh sản phẩm
               ClipRRect(
-                borderRadius: BorderRadius.circular(8), // Bo góc cho hình ảnh
+                borderRadius: BorderRadius.circular(8),
                 child: Image.network(
-                  _getValidImageUrl(
-                      product.imageUrl), // Sử dụng hàm kiểm tra URL hợp lệ
+                  _getValidImageUrl(product.imageUrl),
                   fit: BoxFit.cover,
-                  width: double
-                      .infinity, // Đảm bảo ảnh chiếm hết chiều rộng màn hình
-                  height: 400, // Đặt chiều cao phù hợp cho hình ảnh
+                  width: double.infinity,
+                  height: 400,
                   errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.error,
-                        size: 200); // Hiển thị icon lỗi nếu không tải được ảnh
+                    return const Icon(Icons.error, size: 200);
                   },
                 ),
               ),
               const SizedBox(height: 16),
               Text(
-                product.name ??
-                    'Unnamed Product', // Kiểm tra nếu tên sản phẩm null
+                product.name ?? 'Unnamed Product',
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
@@ -55,7 +53,7 @@ class ProductDetailScreen extends StatelessWidget {
               Text(
                   'Description: ${product.description ?? 'No description available'}'),
               const SizedBox(height: 8),
-              Text('Price: ${product.price?.toStringAsFixed(2) ?? 'N/A'} \Vnd'),
+              Text('Price: ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND'),
               const SizedBox(height: 8),
               Text('Quantity: ${product.quantity ?? 'N/A'} còn hàng'),
               const SizedBox(height: 8),
@@ -90,20 +88,49 @@ class ProductDetailScreen extends StatelessWidget {
   // Hàm kiểm tra và trả về URL hợp lệ cho hình ảnh
   String _getValidImageUrl(String imageUrl) {
     Uri? uri = Uri.tryParse(imageUrl);
-    // Kiểm tra URL hợp lệ, và không phải file cục bộ
     if (uri == null || !uri.isAbsolute || uri.scheme == 'file') {
-      // Nếu URL không hợp lệ hoặc là file cục bộ, sử dụng URL mặc định
       return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2HylmCer78tjnaO7GNoe1aXKdIB06HccobQ&s';
     }
-    return imageUrl; // Nếu URL hợp lệ, trả về chính nó
+    return imageUrl;
   }
 
-  void _addToCart(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Đã thêm sản phẩm vào giỏ hàng'),
-        backgroundColor: Colors.green,
-      ),
-    );
+  void _addToCart(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
+    String? token = prefs.getString('token');
+
+    if (userId == null || token == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('Bạn cần đăng nhập trước khi thêm sản phẩm vào giỏ hàng'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Tạo một instance của CartService
+    CartService cartService = CartService();
+
+    // Gọi phương thức thêm sản phẩm vào giỏ hàng
+    try {
+      // Gọi phương thức addProductToCart với CartItem model
+      await cartService.addProductToCart(
+          product.id, 1); // 1 là số lượng sản phẩm thêm vào giỏ hàng
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Đã thêm sản phẩm vào giỏ hàng'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Lỗi: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
