@@ -49,15 +49,16 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   // Hàm xóa sản phẩm khỏi giỏ hàng
-  // Future<void> removeItemFromCart(String productId) async {
-  //   try {
-  //     CartService cartService = CartService();
-  //     await cartService.removeItem(productId); // Gọi phương thức removeItem từ CartService
-  //     fetchCartItems(); // Refresh cart after removal
-  //   } catch (error) {
-  //     print("Failed to remove item from cart: $error");
-  //   }
-  // }
+  Future<void> removeItemFromCart(String productId) async {
+    try {
+      CartService cartService = CartService();
+      await cartService.removeProductFromCart(
+          productId); // Gọi phương thức removeItem từ CartService
+      fetchCartItems(); // Refresh cart after removal
+    } catch (error) {
+      print("Failed to remove item from cart: $error");
+    }
+  }
 
   // Hàm thanh toán (có thể gọi tới một service khác)
   Future<void> checkout() async {
@@ -93,7 +94,9 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.delete),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          removeItemFromCart(item.id);
+                        },
                       ),
                     );
                   },
