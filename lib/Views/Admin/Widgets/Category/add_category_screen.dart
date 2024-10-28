@@ -13,7 +13,8 @@ class AddCategoryScreen extends StatefulWidget {
 class _AddCategoryScreenState extends State<AddCategoryScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _imageUrlController = TextEditingController(); // Thêm controller cho URL hình ảnh
+  final TextEditingController _imageUrlController =
+      TextEditingController(); // Thêm controller cho URL hình ảnh
   final CategoryService categoryService = CategoryService();
 
   Future<void> addCategory() async {
@@ -24,7 +25,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
         _imageUrlController.text,
       );
       widget.onAdd(); // Gọi callback sau khi thêm
-      Navigator.pop(context); 
+      Navigator.pop(context);
     } catch (e) {
       print('Error adding category: $e');
     }
@@ -49,13 +50,25 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
               decoration: const InputDecoration(labelText: 'Mô tả'),
             ),
             TextField(
-              controller: _imageUrlController, 
+              controller: _imageUrlController,
               decoration: const InputDecoration(labelText: 'URL hình ảnh'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent,
+                  minimumSize: const Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: addCategory,
-              child: const Text('Thêm danh mục'),
+              child: const Text(
+                'Thêm danh mục',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Jaldi',
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),

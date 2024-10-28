@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Views/Admin/Widgets/Category/category_list_screen.dart';
+import 'package:app_supermarket/Views/Admin/Widgets/DiscountCode/discount_code_list_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Product/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,12 +27,10 @@ class _AdminScreenState extends State<AdminScreen> {
           destinations: const [
             NavigationDestination(
                 icon: Icon(Icons.category), label: 'Danh mục'),
+            NavigationDestination(icon: Icon(Icons.store), label: 'Sản phẩm'),
             NavigationDestination(
-                icon: Icon(Icons.production_quantity_limits),
-                label: 'Sản phẩm'),
-            NavigationDestination(
-                icon: Icon(Icons.shopping_bag_rounded), label: 'Đơn hàng'),
-            NavigationDestination(icon: Icon(Icons.settings), label: 'Cài đặt'),
+                icon: Icon(Icons.discount), label: 'Mã giảm giá'),
+            NavigationDestination(icon: Icon(Icons.receipt), label: 'Đơn hàng'),
           ],
         ),
       ),
@@ -45,7 +44,7 @@ class NavigatorCotroller extends GetxController {
   final screens = [
     const CategoryListScreen(),
     const ProductListScreen(),
-    Container(color: Colors.blue),
+    DiscountCodeListScreen(),
     Container(color: Colors.orange),
   ];
 }

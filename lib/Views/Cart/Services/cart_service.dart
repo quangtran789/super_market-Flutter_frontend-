@@ -122,5 +122,45 @@ class CartService {
     } catch (error) {
       throw error;
     }
+
+    //   // Thanh toán bằng PayPal
+    //   Future<void> checkoutWithPayPal() async{
+    //     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //     String? token = prefs.getString('token');
+    //     String? userId = prefs.getString('userId');
+
+    //     if(token == null || userId == null){
+    //       throw Exception('User is not logged in');
+    //     }
+
+    //     final url = Uri.parse('$baseUrl/checkout/paypal');
+
+    //     try {
+    //       final response = await http.post(
+    //         url,
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           'Authorization': 'Bearer $token',
+    //         },
+    //         body: json.encode({
+    //           'userId': userId,
+    //         }),
+    //       );
+    //       if( response.statusCode == 200){
+    //         final String paypaUrl = json.decode(response.body)['url'];
+
+    //         // Mở liên kết PayPal trên trình duyệt để người dùng thanh toán
+    //         if( await canLaunch(paypaUrl)){
+    //           await launch(paypaUrl);
+    //          } else {
+    //         throw Exception('Could not launch PayPal checkout');
+    //       }
+    //     } else {
+    //       throw Exception('Failed to create PayPal checkout');
+    //     }
+    //   } catch (error) {
+    //     throw error;
+    //   }
+    //   }
   }
 }

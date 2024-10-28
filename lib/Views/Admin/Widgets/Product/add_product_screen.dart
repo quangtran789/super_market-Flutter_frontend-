@@ -17,8 +17,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   double? price;
   String? imageUrl;
   int? quantity;
-  Category? selectedCategory;  // Changed to use Category object
-  List<Category> categories = [];  // Changed to use Category objects
+  Category? selectedCategory; // Changed to use Category object
+  List<Category> categories = []; // Changed to use Category objects
   final CategoryService categoryService = CategoryService();
 
   @override
@@ -31,7 +31,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     try {
       final fetchedCategories = await categoryService.getCategories();
       setState(() {
-        categories = fetchedCategories;  // Assuming this is a List<Category>
+        categories = fetchedCategories; // Assuming this is a List<Category>
       });
     } catch (e) {
       print('Error fetching categories: $e');
@@ -81,7 +81,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         'description': description,
         'price': price,
         'imageUrl': imageUrl,
-        'categoryId': selectedCategory!.id,  // Use the `id` field of the Category
+        'categoryId':
+            selectedCategory!.id, // Use the `id` field of the Category
         'quantity': quantity,
       });
 
@@ -161,7 +162,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ? categories.map((Category category) {
                       return DropdownMenuItem<Category>(
                         value: category,
-                        child: Text(category.name),  // Use the `name` field of the Category
+                        child: Text(category
+                            .name), // Use the `name` field of the Category
                       );
                     }).toList()
                   : [
@@ -172,8 +174,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ],
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent,
+                  minimumSize: const Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: _submitForm,
-              child: const Text('Thêm sản phẩm'),
+              child: const Text(
+                'Thêm sản phẩm',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Jaldi',
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),

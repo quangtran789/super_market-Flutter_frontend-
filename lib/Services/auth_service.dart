@@ -72,4 +72,29 @@ class AuthService {
     String? token = prefs.getString('token');
     return token != null; // Trả về true nếu có token
   }
+  // Cập nhật địa chỉ người dùng
+  Future<bool> updateAddress(String address)async{
+    final token = await _getToken();
+
+    final response = await http.put(
+      Uri.parse('$baseUrl/api/users/update-address'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({'address': address}),
+    );
+    if(response.statusCode == 200){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('address', address);
+      return true;
+    }else{
+      return false;
+    }
+  }
+  // Hàm lấy token từ SharedPreferences
+  Future<String?> _getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
 }

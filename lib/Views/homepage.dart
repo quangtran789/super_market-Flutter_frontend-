@@ -13,19 +13,12 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
+  
   final _items = [
     SalomonBottomBarItem(
       icon: const Icon(Icons.home),
       title: const Text(
         "Trang chủ",
-        style: TextStyle(fontSize: 16),
-      ),
-      selectedColor: Color(0xff0FD5AF),
-    ),
-    SalomonBottomBarItem(
-      icon: const Icon(Icons.favorite),
-      title: const Text(
-        "Yêu thích",
         style: TextStyle(fontSize: 16),
       ),
       selectedColor: Color(0xff0FD5AF),
@@ -49,14 +42,13 @@ class _HomepageState extends State<Homepage> {
       selectedColor: Color(0xff0FD5AF),
     ),
   ];
+
   final _screens = [
-    Home(),
-    Center(
-      child: Text("hff"),
-    ),
+    const Home(),
     CartScreen(),
     ProfileScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

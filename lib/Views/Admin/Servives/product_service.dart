@@ -133,4 +133,17 @@ class ProductService {
       throw Exception('Failed to delete product: ${response.body}');
     }
   }
+
+  Future<List<Product>> searchProducts(String query) async {
+    final response = await http.get(Uri.parse('$baseUrl/api/products/search?q=$query'));
+
+    if (response.statusCode == 200) {
+      // Chuyển đổi dữ liệu JSON thành danh sách sản phẩm
+      List<dynamic> data = json.decode(response.body);
+      return data.map((item) => Product.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
+
 }
