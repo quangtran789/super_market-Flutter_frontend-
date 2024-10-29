@@ -40,7 +40,7 @@ class AuthService {
       // Nếu đăng nhập thành công, lưu thông tin vào SharedPreferences
       final data = jsonDecode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      
+
       await prefs.setString('userId', data['_id']); // Lưu userId
       await prefs.setString('email', data['email']);
       await prefs.setString('name', data['name']); // Lưu tên người dùng
@@ -63,7 +63,8 @@ class AuthService {
   // Lấy tên người dùng
   Future<String?> getUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('name'); // Trả về tên người dùng từ SharedPreferences
+    return prefs
+        .getString('name'); // Trả về tên người dùng từ SharedPreferences
   }
 
   // Kiểm tra trạng thái đăng nhập
@@ -72,8 +73,9 @@ class AuthService {
     String? token = prefs.getString('token');
     return token != null; // Trả về true nếu có token
   }
+
   // Cập nhật địa chỉ người dùng
-  Future<bool> updateAddress(String address)async{
+  Future<bool> updateAddress(String address) async {
     final token = await _getToken();
 
     final response = await http.put(
@@ -84,14 +86,42 @@ class AuthService {
       },
       body: jsonEncode({'address': address}),
     );
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('address', address);
       return true;
-    }else{
+    } else {
       return false;
     }
   }
+
+  // Phương thức xóa tài khoản
+  Future<bool> deleteAccount() async {
+    final token = await _getToken(); // Lấy token từ SharedPreferences
+
+    if (token == null) {
+      return false; // Nếu không có token, trả về false
+    }
+
+    final response = await http.delete(
+      Uri.parse(
+          '$baseUrl/api/users/delete-account'), // Đường dẫn API xóa tài khoản
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.clear(); // Xóa thông tin người dùng trong SharedPreferences
+      return true;
+    } else {
+      print('Failed to delete account: ${response.body}');
+      return false;
+    }
+  }
+
   // Hàm lấy token từ SharedPreferences
   Future<String?> _getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
