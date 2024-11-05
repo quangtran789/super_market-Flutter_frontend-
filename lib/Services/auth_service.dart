@@ -75,25 +75,61 @@ class AuthService {
   }
 
   // Cập nhật địa chỉ người dùng
-  Future<bool> updateAddress(String address) async {
-    final token = await _getToken();
+  // Cập nhật địa chỉ người dùng
+Future<Map<String, dynamic>> updateAddress(String address) async {
+  final token = await _getToken();
 
-    final response = await http.put(
-      Uri.parse('$baseUrl/api/users/update-address'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode({'address': address}),
-    );
-    if (response.statusCode == 200) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('address', address);
-      return true;
-    } else {
-      return false;
-    }
+  final response = await http.put(
+    Uri.parse('$baseUrl/api/users/update-address'),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+    body: jsonEncode({'address': address}),
+  );
+
+  if (response.statusCode == 200) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    // Lưu địa chỉ mới vào SharedPreferences
+    await prefs.setString('address', address);
+    
+    // Giả sử phản hồi từ server có dạng: 
+    // { "message": "...", "currentAddress": "..." }
+    final Map<String, dynamic> responseBody = jsonDecode(response.body);
+    return {
+      'success': true,
+      'message': responseBody['message'],
+      'currentAddress': responseBody.containsKey('currentAddress') 
+                          ? responseBody['currentAddress'] 
+                          : null,
+    };
+  } else {
+    return {
+      'success': false,
+      'message': 'Cập nhật địa chỉ không thành công',
+    };
   }
+}
+// Lấy địa chỉ hiện tại của người dùng
+Future<String?> getCurrentAddress() async {
+  final token = await _getToken();
+  final response = await http.get(
+    Uri.parse('$baseUrl/api/users/current-address'),
+    headers: {
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return data['address']; // Trả về địa chỉ
+  } else {
+    return null; // Không có địa chỉ hoặc xảy ra lỗi
+  }
+}
+
+
 
   // Phương thức xóa tài khoản
   Future<bool> deleteAccount() async {

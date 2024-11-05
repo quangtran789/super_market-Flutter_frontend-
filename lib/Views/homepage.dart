@@ -13,7 +13,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-  
+
   final _items = [
     SalomonBottomBarItem(
       icon: const Icon(Icons.home),
