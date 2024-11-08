@@ -177,6 +177,23 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
+  Future<void> updateQuantity(String cartItemId, int newQuantity) async {
+    try {
+      CartService cartService = CartService();
+      await cartService.updateCartItemQuantity(cartItemId, newQuantity);
+      fetchCartItems(); // Làm mới giỏ hàng sau khi cập nhật
+    } catch (error) {
+      print("Failed to update quantity: $error");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Có lỗi xảy ra khi cập nhật số lượng!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,11 +219,35 @@ class _CartScreenState extends State<CartScreen> {
                       subtitle: Text(
                         'Số lượng: ${item.quantity} - Giá: ${item.product.price} VNĐ',
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () async {
-                          await removeItemFromCart(item.id);
-                        },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Nút giảm số lượng
+                          IconButton(
+                            icon: const Icon(Icons.remove),
+                            onPressed: () async {
+                              if (item.quantity > 1) {
+                                // Kiểm tra số lượng sản phẩm không giảm dưới 1
+                                await updateQuantity(
+                                    item.id, item.quantity - 1);
+                              }
+                            },
+                          ),
+                          // Nút tăng số lượng
+                          IconButton(
+                            icon: const Icon(Icons.add),
+                            onPressed: () async {
+                              await updateQuantity(item.id, item.quantity + 1);
+                            },
+                          ),
+                          // Nút xóa sản phẩm khỏi giỏ hàng
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () async {
+                              await removeItemFromCart(item.id);
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },

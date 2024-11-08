@@ -67,6 +67,7 @@ class CartService {
   }
 
   // Cập nhật số lượng sản phẩm trong giỏ hàng
+  // Cập nhật số lượng sản phẩm trong giỏ hàng
   Future<void> updateCartItemQuantity(String cartItemId, int quantity) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -123,7 +124,8 @@ class CartService {
       throw error;
     }
   }
-    // Xóa toàn bộ sản phẩm khỏi giỏ hàng
+
+  // Xóa toàn bộ sản phẩm khỏi giỏ hàng
   Future<void> clearCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -152,4 +154,61 @@ class CartService {
     }
   }
 
+  // Tăng số lượng sản phẩm trong giỏ hàng
+  Future<void> increaseProductQuantity(String cartItemId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) {
+      throw Exception('User is not logged in');
+    }
+
+    final url = Uri.parse(
+        '$baseUrl/increase/$cartItemId'); // URL tăng số lượng sản phẩm
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to increase product quantity');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+// Giảm số lượng sản phẩm trong giỏ hàng
+  Future<void> decreaseProductQuantity(String cartItemId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) {
+      throw Exception('User is not logged in');
+    }
+
+    final url = Uri.parse(
+        '$baseUrl/decrease/$cartItemId'); // URL giảm số lượng sản phẩm
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to decrease product quantity');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
