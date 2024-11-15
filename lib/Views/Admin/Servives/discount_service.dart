@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscountService {
-  final String baseUrl = 'http://192.168.1.20:5000/api'; // Địa chỉ server
+  final String baseUrl = 'http://192.168.1.21:5000/api'; // Địa chỉ server
 
   // Hàm lấy danh sách các mã giảm giá
   Future<List<DiscountCode>> getDiscountCodes() async {

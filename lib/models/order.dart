@@ -2,18 +2,24 @@ class OrderItem {
   final String productId;
   final int quantity;
   final double price;
+  final String imageUrl;
+  final String name;  // Đổi từ productName thành name
 
   OrderItem({
     required this.productId,
     required this.quantity,
     required this.price,
+    required this.imageUrl,
+    required this.name,  // Sử dụng name thay vì productName
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) {
     return OrderItem(
-      productId: json['productId'],
-      quantity: json['quantity'],
-      price: json['price'].toDouble(),
+      productId: json['productId']?.toString() ?? '',
+      quantity: json['quantity'] ?? 0,
+      price: (json['price'] as num).toDouble(),
+      imageUrl: json['imageUrl'] ?? '',
+      name: json['name'] ?? '',  // Đảm bảo lấy tên sản phẩm từ JSON
     );
   }
 
@@ -22,18 +28,23 @@ class OrderItem {
       'productId': productId,
       'quantity': quantity,
       'price': price,
+      'imageUrl': imageUrl,
+      'name': name,  // Bao gồm name trong JSON
     };
   }
 }
 
 
+
 class Order {
-  final String id; // ID của đơn hàng
-  final String userId; // ID của người dùng
-  final List<OrderItem> items; // Danh sách các mặt hàng trong đơn hàng
-  final double totalAmount; // Tổng số tiền
-  final String? discountCode; // Mã giảm giá (nếu có)
-  final double discountValue; // Giá trị giảm giá (nếu có)
+  final String id;
+  final String userId;
+  final List<OrderItem> items;
+  final double totalAmount;
+  final String? discountCode;
+  final double discountValue;
+  final String? address;
+  final String status;
 
   Order({
     required this.id,
@@ -42,25 +53,25 @@ class Order {
     required this.totalAmount,
     this.discountCode,
     this.discountValue = 0.0,
+    this.address,
+    required this.status,
   });
 
-  // Phương thức tạo Order từ JSON
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
-      id: json['id'],
-      userId: json['userId'],
-      items: (json['items'] as List)
-          .map((item) => OrderItem.fromJson(item))
+      id: json['_id']?.toString() ?? '',
+      userId: json['userId']?.toString() ?? '',
+      items: (json['items'] as List<dynamic>)
+          .map((item) => OrderItem.fromJson(item as Map<String, dynamic>))
           .toList(),
-      totalAmount: json['totalAmount'].toDouble(),
-      discountCode: json['discountCode'],
-      discountValue: (json['discountValue'] is int)
-          ? (json['discountValue'] as int).toDouble()
-          : json['discountValue'],
+      totalAmount: (json['totalAmount'] as num).toDouble(),
+      discountCode: json['discountCode'] as String?,
+      discountValue: (json['discountValue'] as num?)?.toDouble() ?? 0.0,
+      address: json['address'] as String?,
+      status: json['status']?.toString() ?? 'chưa giải quyết',
     );
   }
 
-  // Phương thức chuyển Order thành JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -69,7 +80,8 @@ class Order {
       'totalAmount': totalAmount,
       'discountCode': discountCode,
       'discountValue': discountValue,
+      'address': address,
+      'status': status,
     };
   }
 }
-

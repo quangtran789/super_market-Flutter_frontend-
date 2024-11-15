@@ -3,7 +3,7 @@ import 'package:app_supermarket/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
-  String baseUrl = 'http://192.168.1.20:5000/api/products';
+  String baseUrl = 'http://192.168.1.21:5000/api/products';
 
   // Lấy danh sách sản phẩm
   Future<List<Product>> getProducts() async {
@@ -134,16 +134,22 @@ class ProductService {
     }
   }
 
-  Future<List<Product>> searchProducts(String query) async {
-    final response = await http.get(Uri.parse('$baseUrl/api/products/search?q=$query'));
+// Hàm tìm kiếm sản phẩm
+  Future<List<Product>> searchProducts(String name) async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/search/$name'));
 
-    if (response.statusCode == 200) {
-      // Chuyển đổi dữ liệu JSON thành danh sách sản phẩm
-      List<dynamic> data = json.decode(response.body);
-      return data.map((item) => Product.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load products');
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        // Chuyển đổi dữ liệu từ JSON thành danh sách sản phẩm
+        return data
+            .map((item) => Product.fromJson(item as Map<String, dynamic>))
+            .toList();
+      } else {
+        throw Exception('Failed to search products: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error searching products: $error');
     }
   }
-
 }

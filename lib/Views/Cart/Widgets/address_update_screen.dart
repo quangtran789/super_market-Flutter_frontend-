@@ -18,12 +18,19 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
   }
 
   // Hàm tải địa chỉ hiện tại (nếu có)
-  void _loadCurrentAddress() async {
+  Future<void> _loadCurrentAddress() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? address = prefs.getString('address');
+
+    if (address == null || address.isEmpty) {
+      // Nếu không có địa chỉ trong SharedPreferences, lấy từ API
+      AuthService authService = AuthService();
+      address = await authService.getCurrentAddress();
+    }
+
     setState(() {
-      currentAddress = address; // Lưu địa chỉ hiện tại vào biến
-      if (address != null) {
+      currentAddress = address; // Cập nhật địa chỉ hiện tại vào biến
+      if (address != null && address.isNotEmpty) {
         _addressController.text = address; // Hiển thị địa chỉ hiện tại nếu có
       }
     });
@@ -43,7 +50,7 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
     final result = await authService.updateAddress(newAddress);
 
     if (result['success']) {
-      // Nếu cập nhật thành công, lưu lại địa chỉ và quay lại màn hình trước
+      // Nếu cập nhật thành công, lưu lại địa chỉ mới và quay lại màn hình trước
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('address', newAddress);
 
@@ -75,7 +82,7 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if (currentAddress != null) ...[
+            if (currentAddress != null && currentAddress!.isNotEmpty) ...[
               Text(
                 'Địa chỉ hiện tại: $currentAddress',
                 style:

@@ -73,52 +73,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text('Hồ Sơ Người Dùng'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Tên: ${name ?? 'Chưa có tên'}',
-                style: const TextStyle(fontSize: 20)),
-            Text('Email: ${email ?? 'Chưa có email'}',
-                style: const TextStyle(fontSize: 20)),
-            Text('Vai trò: ${role ?? 'Chưa có vai trò'}',
-                style: const TextStyle(fontSize: 20)),
-            SizedBox(
-              height: 50,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff0091E5),
-                minimumSize: const Size(400, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey[200],
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.grey[500],
+                  ),
                 ),
               ),
-              onPressed: logout,
-              child: const Text(
-                'Đăng xuất',
-                style: TextStyle(fontSize: 22, color: Colors.white),
+              SizedBox(height: 20),
+              Text(
+                name ?? 'Chưa có tên',
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: const Size(400, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              SizedBox(height: 5),
+              Text(
+                email ?? 'Chưa có email',
+                style: const TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Vai trò: ${role ?? 'Chưa có vai trò'}',
+                style: const TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+              SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff0091E5),
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: logout,
+                child: const Text(
+                  'Đăng xuất',
+                  style: TextStyle(fontSize: 22, color: Colors.white),
                 ),
               ),
-              onPressed: deleteAccount,
-              child: const Text(
-                'Xóa Tài Khoản',
-                style: TextStyle(fontSize: 22, color: Colors.white),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: deleteAccount,
+                child: const Text(
+                  'Xóa Tài Khoản',
+                  style: TextStyle(fontSize: 22, color: Colors.white),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

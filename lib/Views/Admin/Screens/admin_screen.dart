@@ -1,5 +1,6 @@
 import 'package:app_supermarket/Views/Admin/Widgets/Category/category_list_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/DiscountCode/discount_code_list_screen.dart';
+import 'package:app_supermarket/Views/Admin/Widgets/Order/list_order_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Product/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,6 @@ class NavigatorCotroller extends GetxController {
     const CategoryListScreen(),
     const ProductListScreen(),
     DiscountCodeListScreen(),
-    Container(color: Colors.orange),
+    OrderListScreen()
   ];
 }

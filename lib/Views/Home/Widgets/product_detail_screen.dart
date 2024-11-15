@@ -1,3 +1,4 @@
+import 'package:app_supermarket/Views/Cart/Screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/product.dart';
 import 'package:app_supermarket/models/cart.dart'; // Import CartItem model
@@ -18,8 +19,11 @@ class ProductDetailScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              // Thực hiện chức năng thêm vào giỏ hàng
-              _addToCart(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(),
+                  ));
             },
           ),
         ],
@@ -51,14 +55,14 @@ class ProductDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                  'Description: ${product.description ?? 'No description available'}'),
+                  'Mô tả: ${product.description ?? 'No description available'}'),
               const SizedBox(height: 8),
-              Text('Price: ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND'),
+              Text(
+                'Giá: ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND',
+                style: const TextStyle(color: Colors.red, fontSize: 20),
+              ),
               const SizedBox(height: 8),
-              Text('Quantity: ${product.quantity ?? 'N/A'} còn hàng'),
-              const SizedBox(height: 8),
-              Text('Category ID: ${product.categoryId ?? 'N/A'}'),
-              const SizedBox(height: 16),
+
               // Nút thêm vào giỏ hàng
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -70,7 +74,7 @@ class ProductDetailScreen extends StatelessWidget {
                   _addToCart(context);
                 },
                 child: const Text(
-                  'Add to Cart',
+                  'Thêm vào giỏ hàng',
                   style: TextStyle(
                     fontSize: 22,
                     fontFamily: 'Jaldi',

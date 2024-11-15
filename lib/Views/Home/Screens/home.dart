@@ -6,6 +6,7 @@ import 'package:app_supermarket/Views/Home/Screens/productByCategory_screen.dart
 
 import 'package:app_supermarket/Views/Home/Widgets/carousel_image.dart';
 import 'package:app_supermarket/Views/Home/Widgets/product_detail_screen.dart';
+import 'package:app_supermarket/Views/Home/Widgets/search_screen.dart';
 import 'package:app_supermarket/Views/Login/Screens/login_screens.dart';
 import 'package:app_supermarket/Views/Login/Widgets/custom_textfield.dart';
 import 'package:app_supermarket/models/category.dart';
@@ -31,6 +32,23 @@ class _HomeState extends State<Home> {
   List<Product> productList = [];
   bool isLoading = true;
   String selectedCategoryId = '';
+
+  // Chuyển hướng đến trang tìm kiếm với từ khóa
+  void navigateToSearchScreen() {
+    String query = searchController.text;
+    if (query.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchScreen(query: query),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Vui lòng nhập từ khóa tìm kiếm')),
+      );
+    }
+  }
 
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -148,10 +166,21 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                CustomTextfield(
-                  controller: searchController,
-                  labelText: 'Tìm kiếm sản phẩm...',
-                  prefixIcon: const Icon(Icons.search),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextfield(
+                        controller: searchController,
+                        labelText: 'Tìm kiếm sản phẩm...',
+                        prefixIcon: const Icon(Icons.search),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed:
+                          navigateToSearchScreen, // Điều hướng qua SearchScreen
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 SizedBox(

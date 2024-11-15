@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/cart.dart'; // Nhớ import CartModel ở đây
 import 'package:app_supermarket/Views/Cart/Services/cart_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pay/pay.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -22,6 +23,16 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     fetchCartItems();
+  }
+
+  List<PaymentItem> getPaymentItems(double amount) {
+    return [
+      PaymentItem(
+        label: 'Tổng tiền',
+        amount: amount.toStringAsFixed(2),
+        status: PaymentItemStatus.final_price,
+      ),
+    ];
   }
 
   // Hàm lấy danh sách sản phẩm trong giỏ hàng
@@ -109,6 +120,8 @@ class _CartScreenState extends State<CartScreen> {
           productId: cartItem.productId,
           quantity: cartItem.quantity,
           price: cartItem.product.price,
+          imageUrl: cartItem.product.imageUrl,
+          name: cartItem.product.name,
         );
       }).toList();
 
