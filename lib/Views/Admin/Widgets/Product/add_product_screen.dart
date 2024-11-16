@@ -2,6 +2,7 @@ import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
 import 'package:app_supermarket/Views/Admin/Servives/category_service.dart';
 import 'package:app_supermarket/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -102,14 +103,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thêm Sản Phẩm'),
+        title: Text(
+            AppLocalizations.of(context)?.get('addProduct') ?? 'Thêm Sản Phẩm'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
-              decoration: const InputDecoration(labelText: 'Tên sản phẩm'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('productName') ??
+                      'Tên sản phẩm'),
               onChanged: (value) {
                 setState(() {
                   name = value;
@@ -117,7 +121,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'Mô tả sản phẩm'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('description') ??
+                      'Mô tả sản phẩm'),
               onChanged: (value) {
                 setState(() {
                   description = value;
@@ -125,7 +131,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'Giá sản phẩm'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('price') ??
+                      'Giá sản phẩm'),
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
@@ -134,7 +142,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'URL hình ảnh'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('imageUrl') ??
+                      'URL hình ảnh'),
               onChanged: (value) {
                 setState(() {
                   imageUrl = value;
@@ -142,7 +152,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'Số lượng'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('quantity') ??
+                      'Số lượng'),
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
@@ -151,7 +163,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
               },
             ),
             DropdownButton<Category>(
-              hint: const Text('Chọn danh mục'),
+              hint: Text(AppLocalizations.of(context)?.get('chooseCategory') ??
+                  'Chọn danh mục'),
               value: selectedCategory,
               onChanged: (Category? newValue) {
                 setState(() {
@@ -180,8 +193,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
               onPressed: _submitForm,
-              child: const Text(
-                'Thêm sản phẩm',
+              child: Text(
+                AppLocalizations.of(context)?.get('addProduct') ??
+                    'Thêm sản phẩm',
                 style: TextStyle(
                   fontSize: 22,
                   fontFamily: 'Jaldi',

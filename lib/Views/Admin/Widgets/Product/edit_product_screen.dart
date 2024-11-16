@@ -1,5 +1,6 @@
 import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
 import 'package:app_supermarket/models/product.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -57,7 +58,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
         await productService.updateProduct(
             widget.product.id, updatedProduct); // Sử dụng id thay vì _id
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Sản phẩm đã được cập nhật')),
+          SnackBar(
+              content: Text(AppLocalizations.of(context)
+                      ?.get('productUpdatedSuccessfully') ??
+                  'Sản phẩm đã được cập nhật')),
         );
         Navigator.pop(context); // Trở về màn hình trước đó sau khi cập nhật
       } catch (e) {
@@ -73,7 +77,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chỉnh sửa sản phẩm'),
+        title: Text(AppLocalizations.of(context)?.get('editProduct') ??
+            'Chỉnh sửa sản phẩm'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,7 +89,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
             children: [
               TextFormField(
                 controller: nameController,
-                decoration: const InputDecoration(labelText: 'Tên sản phẩm'),
+                decoration: InputDecoration(
+                    labelText:
+                        AppLocalizations.of(context)?.get('productName') ??
+                            'Tên sản phẩm'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Vui lòng nhập tên sản phẩm';
@@ -95,7 +103,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: descriptionController,
-                decoration: const InputDecoration(labelText: 'Mô tả'),
+                decoration: InputDecoration(
+                    labelText:
+                        AppLocalizations.of(context)?.get('description') ??
+                            'Mô tả'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Vui lòng nhập mô tả sản phẩm';
@@ -106,7 +117,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: priceController,
-                decoration: const InputDecoration(labelText: 'Giá sản phẩm'),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)?.get('price') ??
+                        'Giá sản phẩm'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -121,7 +134,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: imageUrlController,
-                decoration: const InputDecoration(labelText: 'URL hình ảnh'),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)?.get('imageUrl') ??
+                        'URL hình ảnh'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Vui lòng nhập URL hình ảnh';
@@ -131,8 +146,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
               ),
               const SizedBox(height: 32.0),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff0091E5),
+                    minimumSize: const Size(400, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
                 onPressed: updateProduct,
-                child: const Text('Cập nhật sản phẩm'),
+                child: Text(
+                  AppLocalizations.of(context)?.get('updateProduct') ??
+                      'Cập nhật sản phẩm',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontFamily: 'Jaldi',
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

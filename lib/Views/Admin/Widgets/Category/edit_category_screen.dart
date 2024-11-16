@@ -1,3 +1,4 @@
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class EditCategoryScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class EditCategoryScreen extends StatefulWidget {
     required this.categoryName,
     required this.categoryDescription,
     this.categoryImageUrl,
-    required this.onUpdate, 
+    required this.onUpdate,
   });
 
   @override
@@ -58,7 +59,8 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chỉnh sửa danh mục"),
+        title: Text(AppLocalizations.of(context)?.get('editCategory') ??
+            "Chỉnh sửa danh mục"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -66,20 +68,40 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
           children: [
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(labelText: 'Tên danh mục'),
+              decoration: InputDecoration(
+                  labelText:
+                      AppLocalizations.of(context)?.get('categoryName') ??
+                          'Tên danh mục'),
             ),
             TextField(
               controller: descriptionController,
-              decoration: const InputDecoration(labelText: 'Mô tả'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('description') ??
+                      'Mô tả'),
             ),
             TextField(
               controller: imageUrlController,
-              decoration: const InputDecoration(labelText: 'URL hình ảnh'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('imageUrl') ??
+                      'URL hình ảnh'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent,
+                  minimumSize: const Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: _updateCategory,
-              child: const Text('Lưu thay đổi'),
+              child: Text(
+                AppLocalizations.of(context)?.get('saveChanges') ??
+                    'Lưu thay đổi',
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'Jaldi',
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),

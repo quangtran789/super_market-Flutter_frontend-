@@ -2,11 +2,11 @@ import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Product/add_product_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Product/edit_product_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Product/product_detail_list_screen.dart';
-import 'package:app_supermarket/Views/Home/Screens/home.dart';
 import 'package:app_supermarket/Views/homepage.dart';
 import 'package:app_supermarket/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -47,12 +47,20 @@ class _ProductListScreenState extends State<ProductListScreen> {
         products.removeWhere((product) => product.id == productId);
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Sản phẩm đã được xóa thành công')),
+        SnackBar(
+          content: Text(
+              AppLocalizations.of(context)?.get('productDeletedSuccessfully') ??
+                  'Sản phẩm đã được xóa thành công'),
+          backgroundColor: Colors.green,
+        ),
       );
     } catch (e) {
       print('Error deleting product: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Không thể xóa sản phẩm')),
+        SnackBar(
+            content: Text(
+                AppLocalizations.of(context)?.get('cannotDeleteProduct') ??
+                    'Không thể xóa sản phẩm')),
       );
     }
   }
@@ -61,7 +69,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product List'),
+        title: Text(AppLocalizations.of(context)?.get('productList') ??
+            'Danh sách sản phẩm'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -73,7 +82,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
       ),
       body: products.isEmpty
-          ? const Center(child: Text('Không có sản phẩm nào.'))
+          ? Center(
+              child: Text(
+                  AppLocalizations.of(context)?.get('noProductsFound') ??
+                      'Không có sản phẩm nào.'))
           : ListView.builder(
               itemCount: products.length,
               itemBuilder: (context, index) {
@@ -95,15 +107,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
                         icon: Icons.edit,
-                        label: 'Sửa',
+                        label:
+                            AppLocalizations.of(context)?.get('edit') ?? 'Sửa',
                       ),
                       SlidableAction(
                         onPressed: (context) {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: const Text('Xác nhận xóa'),
-                              content: const Text(
+                              title: Text(AppLocalizations.of(context)
+                                      ?.get('confirmDelete') ??
+                                  'Xác nhận xóa'),
+                              content: Text(AppLocalizations.of(context)
+                                      ?.get('areYouSureDeleteProduct') ??
                                   'Bạn có chắc chắn muốn xóa sản phẩm này?'),
                               actions: [
                                 TextButton(
@@ -111,7 +127,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                     Navigator.of(context)
                                         .pop(); // Đóng hộp thoại
                                   },
-                                  child: const Text('Hủy'),
+                                  child: Text(AppLocalizations.of(context)
+                                          ?.get('cancel') ??
+                                      'Hủy'),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -119,7 +137,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                         .pop(); // Đóng hộp thoại
                                     deleteProduct(product.id);
                                   },
-                                  child: const Text('Xóa'),
+                                  child: Text(AppLocalizations.of(context)
+                                          ?.get('delete') ??
+                                      'Xóa'),
                                 ),
                               ],
                             ),
@@ -128,7 +148,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white,
                         icon: Icons.delete,
-                        label: 'Xóa',
+                        label: AppLocalizations.of(context)?.get('delete') ??
+                            'Xóa',
                       ),
                     ],
                   ),
@@ -162,15 +183,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product
-                              .description, // Truy cập thuộc tính đúng của Product
+                          '${AppLocalizations.of(context)?.get('description')}\: ${product.description}', // Truy cập thuộc tính đúng của Product
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                            '\$${product.price.toStringAsFixed(2)}'), // Truy cập thuộc tính đúng của Product
+                            '${AppLocalizations.of(context)?.get('price')}\: ${product.price.toStringAsFixed(2)}\ VND'), // Truy cập thuộc tính đúng của Product
                         Text(
-                            'Category ID: ${product.categoryId}'), // Truy cập thuộc tính đúng của Product
+                          '${AppLocalizations.of(context)!.get('category')} \ID: ${product.categoryId}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        // Truy cập thuộc tính đúng của Product
                       ],
                     ),
                     onTap: () {
@@ -196,7 +219,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
           );
         },
         child: const Icon(Icons.add),
-        tooltip: 'Thêm sản phẩm',
+        tooltip:
+            AppLocalizations.of(context)?.get('addProduct') ?? 'Thêm sản phẩm',
       ),
     );
   }

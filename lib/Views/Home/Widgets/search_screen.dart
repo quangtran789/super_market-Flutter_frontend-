@@ -1,8 +1,9 @@
 import 'package:app_supermarket/Views/Home/Widgets/product_card.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/product.dart';
 import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
- // Import đúng đường dẫn nếu cần
+// Import đúng đường dẫn nếu cần
 
 class SearchScreen extends StatefulWidget {
   final String query;
@@ -47,7 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kết quả tìm kiếm cho "${widget.query}"'),
+        title: Text(
+            '${AppLocalizations.of(context)?.get('searchResultsFor')} \ "${widget.query}"'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -57,7 +59,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemCount: searchResults.length,
                   itemBuilder: (context, index) {
                     final product = searchResults[index];
-                    return ProductCard(product: product); // Sử dụng ProductCard để hiển thị sản phẩm
+                    return ProductCard(
+                        product:
+                            product); // Sử dụng ProductCard để hiển thị sản phẩm
                   },
                 ),
     );

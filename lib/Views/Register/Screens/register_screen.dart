@@ -91,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         prefixIcon: const Icon(Icons.lock_outline),
                         isPassword: true,
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 60),
                       CustomButton(
                         onButtonPressed: _register,
                         text: "Đăng ký",
@@ -106,17 +106,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               endIndent: 10,
                             ),
                           ),
-                          Text('Hoặc đăng ký với'),
-                          Expanded(
-                            child: Divider(
-                              color: Colors.black,
-                              thickness: 1,
-                              indent: 10,
-                            ),
-                          ),
                         ],
                       ),
-                      const SocialLogin(),
                     ],
                   ),
                 )

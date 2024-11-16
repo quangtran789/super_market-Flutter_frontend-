@@ -1,44 +1,38 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 
 class AppLocalizations {
   final Locale locale;
-
   AppLocalizations(this.locale);
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
-
-  Map<String, String>? _localizedStrings;
+  // Lưu trữ bản dịch
+  late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
-    String jsonString =
-        await rootBundle.loadString('assets/languages/${locale.languageCode}.json');
+    String jsonString = await rootBundle.loadString('assets/languages/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
-
-    _localizedStrings = jsonMap.map((key, value) {
-      return MapEntry(key, value.toString());
-    });
-
+    _localizedStrings = jsonMap.map((key, value) => MapEntry(key, value.toString()));
     return true;
   }
 
-  String translate(String key) {
-    return _localizedStrings?[key] ?? key;
+  String? get(String key) {
+    return _localizedStrings[key];
   }
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) =>
-      ['en', 'vi', 'ja', 'th', 'zh'].contains(locale.languageCode);
+  bool isSupported(Locale locale) {
+    // Kiểm tra xem ngôn ngữ có được hỗ trợ không
+    return ['en', 'vi', 'th', 'ja', 'zh', 'pt', 'ko', 'fr'].contains(locale.languageCode);
+  }
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
@@ -48,5 +42,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(covariant LocalizationsDelegate<AppLocalizations> oldDelegate) {
+    return false;
+  }
 }

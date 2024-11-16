@@ -1,9 +1,8 @@
 import 'package:app_supermarket/Views/Admin/Screens/admin_screen.dart';
 import 'package:app_supermarket/Views/Admin/Servives/category_service.dart';
 import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
-
 import 'package:app_supermarket/Views/Home/Screens/productByCategory_screen.dart';
-
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:app_supermarket/Views/Home/Widgets/carousel_image.dart';
 import 'package:app_supermarket/Views/Home/Widgets/product_detail_screen.dart';
 import 'package:app_supermarket/Views/Home/Widgets/search_screen.dart';
@@ -13,7 +12,6 @@ import 'package:app_supermarket/models/category.dart';
 import 'package:app_supermarket/models/product.dart';
 import 'package:app_supermarket/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -45,7 +43,10 @@ class _HomeState extends State<Home> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vui lòng nhập từ khóa tìm kiếm')),
+        SnackBar(
+            content: Text(
+                AppLocalizations.of(context)?.get('pleaseEnterSearchKeyword') ??
+                    'Vui lòng nhập từ khóa tìm kiếm')),
       );
     }
   }
@@ -74,8 +75,9 @@ class _HomeState extends State<Home> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Bạn không có quyền truy cập vào Admin!'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)?.get('noAccessToAdmin') ??
+              'Bạn không có quyền truy cập vào Admin!'),
           backgroundColor: Colors.red,
         ),
       );
@@ -136,14 +138,15 @@ class _HomeState extends State<Home> {
           title: Column(
             children: [
               Text(
-                'Xin chào, $userName',
+                '${AppLocalizations.of(context)!.get('hello')}, $userName',
                 style: const TextStyle(
                     fontSize: 25,
                     fontFamily: 'Jaldi',
                     fontWeight: FontWeight.w400),
               ),
-              const Text(
-                'Bạn muốn mua gì hôm nay?',
+              Text(
+                AppLocalizations.of(context)?.get('whatDoYouWantToBuy') ??
+                    'Bạn muốn mua gì hôm nay?',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
               ),
             ],
@@ -171,7 +174,9 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: CustomTextfield(
                         controller: searchController,
-                        labelText: 'Tìm kiếm sản phẩm...',
+                        labelText: AppLocalizations.of(context)
+                                ?.get('searchProduct') ??
+                            'Tìm kiếm sản phẩm...',
                         prefixIcon: const Icon(Icons.search),
                       ),
                     ),
@@ -248,72 +253,90 @@ class _HomeState extends State<Home> {
                     : productList.isNotEmpty
                         ? Column(
                             children: productList.map((product) {
-                              return ListTile(
-                                leading: Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.black26,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      product.imageUrl,
-                                      width: 50,
-                                      height: 50,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return const Icon(Icons.broken_image,
-                                            size: 50);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      product.name.split(' ').take(2).join(' '),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetailScreen(
+                                                product: product),
                                       ),
-                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: Colors
+                                          .transparent, // Đặt màu nền trong suốt
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: Colors.black26,
+                                        width: 1,
+                                      ),
                                     ),
-                                    Row(
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            'Giá: ${product.price} VND',
+                                    child: ListTile(
+                                      contentPadding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      leading: Container(
+                                        width: 70,
+                                        height: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: Colors.black26,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.network(
+                                            product.imageUrl,
+                                            width: 50,
+                                            height: 50,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return const Icon(
+                                                  Icons.broken_image,
+                                                  size: 50);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      title: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            product.name
+                                                .split(' ')
+                                                .take(2)
+                                                .join(' '),
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                            ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetailScreen(
-                                                        product: product),
+                                          Row(
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  '${AppLocalizations.of(context)!.get('price')}: ${product.price} VND',
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
-                                            );
-                                          },
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue,
+                                            ],
                                           ),
-                                          child: const Text('Xem Thông Tin'),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              );
+                                  ));
                             }).toList(),
                           )
                         : const Center(

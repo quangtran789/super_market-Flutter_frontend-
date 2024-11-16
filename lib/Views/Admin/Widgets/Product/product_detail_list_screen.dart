@@ -1,6 +1,7 @@
 import 'package:app_supermarket/models/product.dart';
 import 'package:flutter/material.dart';
 import 'dart:io'; // Import để xử lý file
+import 'package:app_supermarket/utils/app_localizations.dart';
 
 class ProductDetailListScreen extends StatelessWidget {
   final Product product;
@@ -17,7 +18,6 @@ class ProductDetailListScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               ClipRRect(
                 borderRadius: BorderRadius.circular(8), // Bo góc cho hình ảnh
                 child: _getImageWidget(product.imageUrl),
@@ -29,14 +29,25 @@ class ProductDetailListScreen extends StatelessWidget {
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Text('Description: ${product.description}'),
+              Text(
+                '${AppLocalizations.of(context)!.get('description')}: ${product.description}',
+                style: const TextStyle(fontSize: 16),
+              ),
               const SizedBox(height: 8),
-              Text('Price: \$${product.price.toStringAsFixed(2)}'),
+              Text(
+                '${AppLocalizations.of(context)!.get('price')}: ${product.price.toStringAsFixed(2)} \VND',
+                style: const TextStyle(fontSize: 16),
+              ),
               const SizedBox(height: 8),
-              Text('Quantity: ${product.quantity}'),
+              Text(
+                '${AppLocalizations.of(context)!.get('quantity')}: ${product.quantity}',
+                style: const TextStyle(fontSize: 16),
+              ),
               const SizedBox(height: 8),
-              Text('Category ID: ${product.categoryId}'),
-              // Thêm các thông tin khác nếu cần
+              Text(
+                '${AppLocalizations.of(context)!.get('category')}: ${product.categoryId}',
+                style: const TextStyle(fontSize: 16),
+              ),
             ],
           ),
         ),

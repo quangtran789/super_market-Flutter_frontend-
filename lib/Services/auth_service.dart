@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  String baseUrl = 'http://192.168.1.21:5000';
+  String baseUrl = 'http://192.168.1.20:5000';
   AuthService();
 
   Future<bool> register(String name, String email, String password) async {
@@ -181,5 +181,47 @@ class AuthService {
     return prefs.getString('token');
   }
 
-  
+    // Cập nhật thông tin người dùng (name, email)
+  Future<Map<String, dynamic>> updateUserInfo(String name, String email) async {
+    final token = await _getToken();
+
+    if (token == null) {
+      return {
+        'success': false,
+        'message': 'Không tìm thấy token. Vui lòng đăng nhập lại.',
+      };
+    }
+
+    final response = await http.put(
+      Uri.parse('$baseUrl/api/users/update-info'), // Cập nhật thông tin người dùng
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        'name': name,
+        'email': email,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      // Cập nhật tên và email mới trong SharedPreferences
+      await prefs.setString('name', name);
+      await prefs.setString('email', email);
+
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      return {
+        'success': true,
+        'message': responseBody['message'],
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Cập nhật thông tin không thành công',
+      };
+    }
+  }
+
 }

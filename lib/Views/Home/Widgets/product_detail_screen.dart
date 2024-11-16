@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Views/Cart/Screens/cart_screen.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/product.dart';
 import 'package:app_supermarket/models/cart.dart'; // Import CartItem model
@@ -55,10 +56,10 @@ class ProductDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                  'Mô tả: ${product.description ?? 'No description available'}'),
+                  '${AppLocalizations.of(context)?.get('description')}\:  ${product.description ?? 'No description available'}'),
               const SizedBox(height: 8),
               Text(
-                'Giá: ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND',
+                '${AppLocalizations.of(context)?.get('price')}\:  ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND',
                 style: const TextStyle(color: Colors.red, fontSize: 20),
               ),
               const SizedBox(height: 8),
@@ -73,8 +74,9 @@ class ProductDetailScreen extends StatelessWidget {
                 onPressed: () {
                   _addToCart(context);
                 },
-                child: const Text(
-                  'Thêm vào giỏ hàng',
+                child: Text(
+                  AppLocalizations.of(context)?.get('addToCart') ??
+                      'Thêm vào giỏ hàng',
                   style: TextStyle(
                     fontSize: 22,
                     fontFamily: 'Jaldi',

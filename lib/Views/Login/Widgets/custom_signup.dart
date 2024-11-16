@@ -13,7 +13,7 @@ class CustomCreateaccount extends StatelessWidget {
         OutlinedButton(
           style: OutlinedButton.styleFrom(
               minimumSize: const Size(400, 50),
-              side: const BorderSide(color: Colors.black, width: 1),
+              side: const BorderSide(color: Colors.white, width: 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               )),
@@ -23,7 +23,7 @@ class CustomCreateaccount extends StatelessWidget {
             style: const TextStyle(
               fontSize: 22,
               fontFamily: 'Jaldi',
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app_supermarket/models/cart.dart'; // Import CartItem model
 
 class CartService {
-  final String baseUrl = 'http://192.168.1.21:5000/api/cart';
+  final String baseUrl = 'http://192.168.1.20:5000/api/cart';
 
   // Thêm sản phẩm vào giỏ hàng
   Future<void> addProductToCart(String productId, int quantity) async {

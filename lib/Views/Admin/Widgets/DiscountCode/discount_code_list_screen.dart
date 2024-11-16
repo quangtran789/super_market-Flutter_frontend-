@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Views/homepage.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/discount_code.dart';
 import 'package:app_supermarket/Views/Admin/Servives/discount_service.dart';
@@ -39,7 +40,8 @@ class _DiscountCodeListScreenState extends State<DiscountCodeListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Danh Sách Mã Giảm Giá'),
+        title: Text(AppLocalizations.of(context)?.get('discountList') ??
+            'Danh Sách Mã Giảm Giá'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -74,7 +76,8 @@ class _DiscountCodeListScreenState extends State<DiscountCodeListScreen> {
                     return ListTile(
                       title: Text(discountCode.code),
                       subtitle: Text(
-                          'Giá trị: ${discountCode.discountValue} VNĐ - ${discountCode.isValid ? "Hợp lệ" : "Không hợp lệ"}'),
+                        '${AppLocalizations.of(context)?.get('value')}: ${discountCode.discountValue} VNĐ - ${discountCode.isValid ? AppLocalizations.of(context)?.get('valid') : AppLocalizations.of(context)?.get('invalid')}',
+                      ),
                     );
                   },
                 ),

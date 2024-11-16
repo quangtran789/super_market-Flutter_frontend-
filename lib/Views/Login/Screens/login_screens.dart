@@ -30,26 +30,27 @@ class _LoginScreensState extends State<LoginScreens> {
   }
 
   void login() async {
-  String email = emailController.text.trim();
-  String password = passwordController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
-  bool success = await authService.login(email, password);
-  if (success) {
-    // Lưu thông tin đăng nhập
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email); // Lưu email hoặc token nếu có
+    bool success = await authService.login(email, password);
+    if (success) {
+      // Lưu thông tin đăng nhập
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('email', email); // Lưu email hoặc token nếu có
 
-    // Chuyển đến trang Home
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const Homepage()),
-    );
-  } else {
-    // Nếu thất bại, hiển thị thông báo
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Đăng nhập không thành công, vui lòng kiểm tra lại')),
-    );
-  }
+      // Chuyển đến trang Home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Homepage()),
+      );
+    } else {
+      // Nếu thất bại, hiển thị thông báo
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Đăng nhập không thành công, vui lòng kiểm tra lại')),
+      );
+    }
   }
 
   @override
@@ -98,32 +99,12 @@ class _LoginScreensState extends State<LoginScreens> {
                             prefixIcon: const Icon(Icons.lock_outline),
                             isPassword: true,
                           ),
-                          const SizedBox(height: 5),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ForgetPasswordScreen(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              'Quên mật khẩu?',
-                              style: TextStyle(
-                                color: Color(0xff0094E3),
-                                fontFamily: 'Jaldi',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 40),
                           CustomButton(
                             onButtonPressed: login, // Gọi hàm login
                             text: "Đăng nhập",
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 20),
                           CustomCreateaccount(
                             onSignUpPressed: () {
                               Navigator.push(
@@ -145,17 +126,8 @@ class _LoginScreensState extends State<LoginScreens> {
                                   endIndent: 10,
                                 ),
                               ),
-                              Text('Hoặc đăng nhập với'),
-                              Expanded(
-                                child: Divider(
-                                  color: Colors.black,
-                                  thickness: 1,
-                                  indent: 10,
-                                ),
-                              ),
                             ],
                           ),
-                          const SocialLogin(),
                         ],
                       ),
                     ),

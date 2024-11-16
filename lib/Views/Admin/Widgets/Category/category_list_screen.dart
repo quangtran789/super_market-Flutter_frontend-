@@ -1,10 +1,10 @@
 import 'package:app_supermarket/Views/Admin/Servives/category_service.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Category/add_category_screen.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Category/edit_category_screen.dart';
-import 'package:app_supermarket/Views/Home/Screens/home.dart';
 import 'package:app_supermarket/Views/homepage.dart';
 import 'package:app_supermarket/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 
 class CategoryListScreen extends StatefulWidget {
   const CategoryListScreen({super.key});
@@ -57,14 +57,14 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Danh sách danh mục"),
+        title: Text(
+            AppLocalizations.of(context)?.get('categoryList') ?? 'Trang chủ'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => const Homepage()), 
-              (route) => false, 
+              MaterialPageRoute(builder: (context) => const Homepage()),
+              (route) => false,
             );
           },
         ),
@@ -113,18 +113,25 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: const Text('Xóa danh mục'),
-                        content: const Text(
+                        title: Text(AppLocalizations.of(context)
+                                ?.get('deleteCategory') ??
+                            'Xóa danh mục'),
+                        content: Text(AppLocalizations.of(context)
+                                ?.get('areYouSureDeleteCategory') ??
                             'Bạn có chắc chắn muốn xóa danh mục này không?'),
                         actions: [
                           TextButton(
-                            child: const Text('Hủy'),
+                            child: Text(
+                                AppLocalizations.of(context)?.get('cancel') ??
+                                    'Hủy'),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
                           ),
                           TextButton(
-                            child: const Text('Xóa'),
+                            child: Text(
+                                AppLocalizations.of(context)?.get('delete') ??
+                                    'Xóa'),
                             onPressed: () {
                               fetchDelete(
                                   category); // Truyền cả đối tượng category

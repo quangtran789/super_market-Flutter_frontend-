@@ -1,6 +1,7 @@
 import 'package:app_supermarket/Views/Admin/Servives/order_service.dart';
 import 'package:app_supermarket/Views/Admin/Widgets/Order/edit_order_screen.dart';
 import 'package:app_supermarket/Views/homepage.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_supermarket/models/order.dart';
@@ -24,7 +25,8 @@ class _OrderListScreenState extends State<OrderListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Danh Sách Đơn Hàng"),
+        title: Text(AppLocalizations.of(context)?.get('orderList') ??
+            "Danh Sách Đơn Hàng"),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -51,8 +53,10 @@ class _OrderListScreenState extends State<OrderListScreen> {
               itemBuilder: (context, index) {
                 Order order = orders[index];
                 return ListTile(
-                  title: Text('Đơn hàng ${order.id}'),
-                  subtitle: Text('Tổng tiền: ${order.totalAmount} VND'),
+                  title: Text(
+                      '${AppLocalizations.of(context)?.get('order')} ${order.id}'),
+                  subtitle: Text(
+                      '${AppLocalizations.of(context)?.get('totalAmount')}\:  ${order.totalAmount} VND'),
                   trailing: Text(order.status),
                   onTap: () {
                     // Truyền đúng orderId vào UpdateOrderStatusPage

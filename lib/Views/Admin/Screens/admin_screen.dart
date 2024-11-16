@@ -4,6 +4,7 @@ import 'package:app_supermarket/Views/Admin/Widgets/Order/list_order_screen.dart
 import 'package:app_supermarket/Views/Admin/Widgets/Product/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -25,13 +26,25 @@ class _AdminScreenState extends State<AdminScreen> {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) =>
               controller.selectedIndex.value = index,
-          destinations: const [
+          destinations: [
             NavigationDestination(
-                icon: Icon(Icons.category), label: 'Danh mục'),
-            NavigationDestination(icon: Icon(Icons.store), label: 'Sản phẩm'),
+              icon: const Icon(Icons.category),
+              label:
+                  AppLocalizations.of(context)?.get('category') ?? 'Danh mục',
+            ),
             NavigationDestination(
-                icon: Icon(Icons.discount), label: 'Mã giảm giá'),
-            NavigationDestination(icon: Icon(Icons.receipt), label: 'Đơn hàng'),
+              icon: const Icon(Icons.store),
+              label: AppLocalizations.of(context)?.get('product') ?? 'Sản phẩm',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.discount),
+              label: AppLocalizations.of(context)?.get('discountCode') ??
+                  'Mã giảm giá',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.receipt),
+              label: AppLocalizations.of(context)?.get('order') ?? 'Đơn hàng',
+            ),
           ],
         ),
       ),

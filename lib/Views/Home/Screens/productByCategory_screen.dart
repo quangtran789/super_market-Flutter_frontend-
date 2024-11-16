@@ -1,6 +1,7 @@
 import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
 import 'package:app_supermarket/Views/Home/Widgets/product_detail_screen.dart';
 import 'package:app_supermarket/models/product.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class ProductbycategoryScreen extends StatefulWidget {
@@ -51,7 +52,8 @@ class _ProductbycategoryScreenState extends State<ProductbycategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sản phẩm: ${widget.categoryName}'),
+        title: Text(
+            '${AppLocalizations.of(context)?.get('product')}: ${widget.categoryName}'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -92,7 +94,8 @@ class _ProductbycategoryScreenState extends State<ProductbycategoryScreen> {
                         style:
                             const TextStyle(fontFamily: 'Jaldi', fontSize: 20),
                       ),
-                      subtitle: Text('Giá: ${product.price} \VND'),
+                      subtitle: Text(
+                          '${AppLocalizations.of(context)?.get('price')}: ${product.price} \VND'),
                       trailing: TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -103,7 +106,9 @@ class _ProductbycategoryScreenState extends State<ProductbycategoryScreen> {
                             ),
                           );
                         },
-                        child: const Text('Xem Thông Tin'),
+                        child: Text(
+                            AppLocalizations.of(context)?.get('viewDetails') ??
+                                'Xem Thông Tin'),
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.blue, // Text color
                         ),

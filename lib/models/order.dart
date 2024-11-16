@@ -3,14 +3,14 @@ class OrderItem {
   final int quantity;
   final double price;
   final String imageUrl;
-  final String name;  // Đổi từ productName thành name
+  final String name; // Đổi từ productName thành name
 
   OrderItem({
     required this.productId,
     required this.quantity,
     required this.price,
     required this.imageUrl,
-    required this.name,  // Sử dụng name thay vì productName
+    required this.name, // Sử dụng name thay vì productName
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class OrderItem {
       quantity: json['quantity'] ?? 0,
       price: (json['price'] as num).toDouble(),
       imageUrl: json['imageUrl'] ?? '',
-      name: json['name'] ?? '',  // Đảm bảo lấy tên sản phẩm từ JSON
+      name: json['name'] ?? '', // Đảm bảo lấy tên sản phẩm từ JSON
     );
   }
 
@@ -29,12 +29,10 @@ class OrderItem {
       'quantity': quantity,
       'price': price,
       'imageUrl': imageUrl,
-      'name': name,  // Bao gồm name trong JSON
+      'name': name, // Bao gồm name trong JSON
     };
   }
 }
-
-
 
 class Order {
   final String id;

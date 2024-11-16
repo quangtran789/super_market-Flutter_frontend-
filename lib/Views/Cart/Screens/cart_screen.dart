@@ -2,6 +2,7 @@ import 'package:app_supermarket/Views/Admin/Servives/discount_service.dart';
 import 'package:app_supermarket/Views/Admin/Servives/order_service.dart';
 import 'package:app_supermarket/Views/Cart/Widgets/address_update_screen.dart';
 import 'package:app_supermarket/models/order.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/cart.dart'; // Nhớ import CartModel ở đây
 import 'package:app_supermarket/Views/Cart/Services/cart_service.dart';
@@ -23,16 +24,6 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     fetchCartItems();
-  }
-
-  List<PaymentItem> getPaymentItems(double amount) {
-    return [
-      PaymentItem(
-        label: 'Tổng tiền',
-        amount: amount.toStringAsFixed(2),
-        status: PaymentItemStatus.final_price,
-      ),
-    ];
   }
 
   // Hàm lấy danh sách sản phẩm trong giỏ hàng
@@ -211,12 +202,14 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giỏ Hàng'),
+        title: Text(AppLocalizations.of(context)?.get('cart') ?? 'Giỏ Hàng'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : cartItems.isEmpty
-              ? const Center(child: Text('Giỏ hàng trống'))
+              ? Center(
+                  child: Text(AppLocalizations.of(context)?.get('emptyCart') ??
+                      'Giỏ hàng trống'))
               : ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
@@ -274,9 +267,10 @@ class _CartScreenState extends State<CartScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Tổng tiền:",
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)?.get('totalAmount') ??
+                      "Tổng tiền:",
+                  style: const TextStyle(
                     fontSize: 25,
                     fontFamily: 'Jaldi',
                   ),
@@ -294,9 +288,11 @@ class _CartScreenState extends State<CartScreen> {
             const SizedBox(height: 10),
             // TextField để nhập mã giảm giá
             TextField(
-              decoration: const InputDecoration(
-                labelText: 'Nhập mã giảm giá',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText:
+                    AppLocalizations.of(context)?.get('enterDiscountCode') ??
+                        'Nhập mã giảm giá',
+                border: const OutlineInputBorder(),
               ),
               onChanged: (value) {
                 setState(() {
@@ -314,10 +310,10 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
               onPressed: applyDiscountCode, // Gọi hàm áp dụng mã giảm giá
-              child: const Text(
-                'Áp dụng',
-                style: TextStyle(
-                  fontSize: 22,
+              child: Text(
+                AppLocalizations.of(context)?.get('apply') ?? 'Áp dụng',
+                style: const TextStyle(
+                  fontSize: 17,
                   fontFamily: 'Jaldi',
                   color: Colors.white,
                 ),
@@ -336,10 +332,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   onPressed: updateAddress, // Gọi hàm cập nhật địa chỉ
-                  child: const Text(
-                    'Cập nhật địa chỉ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  child: Text(
+                    AppLocalizations.of(context)?.get('updateAddress') ??
+                        'Cập nhật địa chỉ',
+                    style: const TextStyle(
+                      fontSize: 17,
                       fontFamily: 'Jaldi',
                       color: Colors.white,
                     ),
@@ -354,10 +351,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   onPressed: checkout, // Gọi hàm thanh toán
-                  child: const Text(
-                    'Thanh toán',
-                    style: TextStyle(
-                      fontSize: 22,
+                  child: Text(
+                    AppLocalizations.of(context)?.get('shipping') ??
+                        'Giao hàng',
+                    style: const TextStyle(
+                      fontSize: 17,
                       fontFamily: 'Jaldi',
                       color: Colors.white,
                     ),

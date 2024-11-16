@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Views/Admin/Servives/category_service.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AddCategoryScreen extends StatefulWidget {
@@ -35,7 +36,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thêm danh mục'),
+        title: Text(AppLocalizations.of(context)?.get('addCategory') ??
+            'Thêm danh mục'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -43,15 +45,22 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Tên danh mục'),
+              decoration: InputDecoration(
+                  labelText:
+                      AppLocalizations.of(context)?.get('categoryName') ??
+                          'Tên danh mục'),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Mô tả'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('description') ??
+                      'Mô tả'),
             ),
             TextField(
               controller: _imageUrlController,
-              decoration: const InputDecoration(labelText: 'URL hình ảnh'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('imageUrl') ??
+                      'URL hình ảnh'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -61,8 +70,9 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
               onPressed: addCategory,
-              child: const Text(
-                'Thêm danh mục',
+              child: Text(
+                AppLocalizations.of(context)?.get('addCategory') ??
+                    'Thêm danh mục',
                 style: TextStyle(
                   fontSize: 22,
                   fontFamily: 'Jaldi',

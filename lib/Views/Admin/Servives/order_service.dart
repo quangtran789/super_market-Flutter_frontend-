@@ -4,7 +4,7 @@ import 'package:app_supermarket/models/order.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderService {
-  final String baseUrl = 'http://192.168.1.21:5000/api/orders';
+  final String baseUrl = 'http://192.168.1.20:5000/api/orders';
 
   // Fetch token from SharedPreferences
   Future<String?> getToken() async {

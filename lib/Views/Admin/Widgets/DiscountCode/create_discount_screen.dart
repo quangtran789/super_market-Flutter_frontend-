@@ -1,3 +1,4 @@
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/Views/Admin/Servives/discount_service.dart';
 import 'package:app_supermarket/models/discount_code.dart';
@@ -50,7 +51,8 @@ class _CreateDiscountCodeScreenState extends State<CreateDiscountCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tạo Mã Giảm Giá'),
+        title: Text(AppLocalizations.of(context)?.get('createDiscountCode') ??
+            'Tạo Mã Giảm Giá'),
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator()) // Hiển thị loading
@@ -61,7 +63,10 @@ class _CreateDiscountCodeScreenState extends State<CreateDiscountCodeScreen> {
                 child: Column(
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Mã Giảm Giá'),
+                      decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)
+                                  ?.get('discountCode') ??
+                              'Mã Giảm Giá'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Vui lòng nhập mã giảm giá.';
@@ -73,8 +78,10 @@ class _CreateDiscountCodeScreenState extends State<CreateDiscountCodeScreen> {
                       },
                     ),
                     TextFormField(
-                      decoration:
-                          InputDecoration(labelText: 'Giá trị Giảm Giá (VNĐ)'),
+                      decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)
+                                  ?.get('discountValue') ??
+                              'Giá trị Giảm Giá (VNĐ)'),
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -87,7 +94,10 @@ class _CreateDiscountCodeScreenState extends State<CreateDiscountCodeScreen> {
                       },
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Ngày Hết Hạn'),
+                      decoration: InputDecoration(
+                          labelText:
+                              AppLocalizations.of(context)?.get('expiryDate') ??
+                                  'Ngày Hết Hạn'),
                       readOnly: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
@@ -114,7 +124,9 @@ class _CreateDiscountCodeScreenState extends State<CreateDiscountCodeScreen> {
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: _createDiscountCode,
                       child: Text(
-                        'Tạo Mã Giảm Giá',
+                        AppLocalizations.of(context)
+                                ?.get('createDiscountCode') ??
+                            'Tạo Mã Giảm Giá',
                         style: TextStyle(
                           fontSize: 22,
                           fontFamily: 'Jaldi',

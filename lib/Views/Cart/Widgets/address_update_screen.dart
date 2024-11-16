@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Services/auth_service.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,7 +42,10 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
     String newAddress = _addressController.text.trim();
     if (newAddress.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vui lòng nhập địa chỉ mới')),
+        SnackBar(
+            content: Text(
+                AppLocalizations.of(context)?.get('pleaseEnterNewAddress') ??
+                    'Vui lòng nhập địa chỉ mới')),
       );
       return;
     }
@@ -56,8 +60,10 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
 
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Cập nhật địa chỉ thành công'),
+        SnackBar(
+          content: Text(
+              AppLocalizations.of(context)?.get('addressUpdatedSuccessfully') ??
+                  'Cập nhật địa chỉ thành công'),
           backgroundColor: Colors.green,
         ),
       );
@@ -76,7 +82,8 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cập nhật địa chỉ'),
+        title: Text(AppLocalizations.of(context)?.get('updateAddress') ??
+            'Cập nhật địa chỉ'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,7 +91,7 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
           children: [
             if (currentAddress != null && currentAddress!.isNotEmpty) ...[
               Text(
-                'Địa chỉ hiện tại: $currentAddress',
+                '${AppLocalizations.of(context)?.get('currentAddress')}: $currentAddress',
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -92,8 +99,9 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
             ],
             TextField(
               controller: _addressController,
-              decoration: const InputDecoration(
-                labelText: 'Địa chỉ mới',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)?.get('newAddress') ??
+                    'Địa chỉ mới',
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,
@@ -108,8 +116,9 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
                 ),
               ),
               onPressed: _updateAddress,
-              child: const Text(
-                'Cập nhật địa chỉ',
+              child: Text(
+                AppLocalizations.of(context)?.get('updateAddress') ??
+                    'Cập nhật địa chỉ',
                 style: TextStyle(
                   fontSize: 22,
                   fontFamily: 'Jaldi',

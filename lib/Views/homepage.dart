@@ -1,8 +1,10 @@
 import 'package:app_supermarket/Views/Cart/Screens/cart_screen.dart';
 import 'package:app_supermarket/Views/Home/Screens/home.dart';
 import 'package:app_supermarket/Views/Profile/profile_screen.dart';
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+// Import AppLocalizations
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -17,29 +19,44 @@ class _HomepageState extends State<Homepage> {
   final _items = [
     SalomonBottomBarItem(
       icon: const Icon(Icons.home),
-      title: const Text(
-        "Trang chủ",
-        style: TextStyle(fontSize: 16),
+      title: Builder(
+        builder: (context) {
+          return Text(
+            AppLocalizations.of(context)?.get('home') ??
+                'Danh sách danh mục', // Sử dụng bản dịch
+            style: const TextStyle(fontSize: 16),
+          );
+        },
       ),
-      selectedColor: Color(0xff0FD5AF),
+      selectedColor: const Color(0xff0FD5AF),
     ),
     SalomonBottomBarItem(
       icon: const Icon(
         Icons.shopping_bag,
       ),
-      title: const Text(
-        "Giỏ hàng",
-        style: TextStyle(fontSize: 16),
+      title: Builder(
+        builder: (context) {
+          return Text(
+            AppLocalizations.of(context)?.get('cart') ??
+                'Giỏ hàng', // Sử dụng bản dịch
+            style: const TextStyle(fontSize: 16),
+          );
+        },
       ),
-      selectedColor: Color(0xff0FD5AF),
+      selectedColor: const Color(0xff0FD5AF),
     ),
     SalomonBottomBarItem(
       icon: const Icon(Icons.person),
-      title: const Text(
-        "Cá nhân",
-        style: TextStyle(fontSize: 16),
+      title: Builder(
+        builder: (context) {
+          return Text(
+            AppLocalizations.of(context)?.get('personal') ??
+                'Cá nhân', // Sử dụng bản dịch
+            style: const TextStyle(fontSize: 16),
+          );
+        },
       ),
-      selectedColor: Color(0xff0FD5AF),
+      selectedColor: const Color(0xff0FD5AF),
     ),
   ];
 

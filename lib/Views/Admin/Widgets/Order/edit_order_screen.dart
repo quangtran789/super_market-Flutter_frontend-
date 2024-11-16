@@ -1,3 +1,4 @@
+import 'package:app_supermarket/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:app_supermarket/models/order.dart';
 import 'package:app_supermarket/Views/Admin/Servives/order_service.dart';
@@ -43,23 +44,37 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cập nhật trạng thái đơn hàng'),
+        title: Text(AppLocalizations.of(context)?.get('updateOrderStatus') ??
+            'Cập nhật trạng thái đơn hàng'),
       ),
       body: _order == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Đơn hàng: ${_order!.id}',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 20),
-                  Text('Sản phẩm trong đơn hàng:',
+                  // Mã đơn hàng
+                  Text(
+                      '${AppLocalizations.of(context)?.get('orderNumber')}\:  ${_order!.id}',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+
+                  // Địa chỉ giao hàng
+                  const SizedBox(height: 10),
+                  Text(
+                      '${AppLocalizations.of(context)?.get('address')}\:  ${_order!.address ?? 'Không có địa chỉ'}',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+
+                  const SizedBox(height: 20),
+                  Text(
+                      '${AppLocalizations.of(context)?.get('orderProducts') ?? "Sản phẩm trong đơn hàng"}\:',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
+
+                  // Danh sách sản phẩm
                   Expanded(
                     child: ListView.builder(
                       itemCount: _order!.items.length,
@@ -74,20 +89,25 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                                 : Icon(Icons.image, size: 50),
                             title: Text(item.name), // Hiển thị tên sản phẩm
                             subtitle: Text(
-                                'Số lượng: ${item.quantity}, Giá: ${item.price}'),
+                                '${AppLocalizations.of(context)?.get('quantity')}\: ${item.quantity}, \| ${AppLocalizations.of(context)?.get('price')}\: ${item.price}'),
                           ),
                         );
                       },
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text('Chọn trạng thái mới:',
+
+                  const SizedBox(height: 20),
+                  Text(
+                      AppLocalizations.of(context)?.get('chooseNewStatus') ??
+                          'Chọn trạng thái mới:',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   DropdownButton<String>(
                     value: _selectedStatus,
-                    hint: Text('Chọn trạng thái'),
+                    hint: Text(
+                        AppLocalizations.of(context)?.get('chooseStatus') ??
+                            'Chọn trạng thái'),
                     isExpanded: true,
                     items: _statuses
                         .map((status) => DropdownMenuItem(
@@ -101,7 +121,7 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                       });
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.greenAccent,
@@ -131,8 +151,9 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                             }
                           },
                     child: Text(
-                      'Cập nhật trạng thái',
-                      style: TextStyle(
+                      AppLocalizations.of(context)?.get('updateStatus') ??
+                          'Cập nhật trạng thái',
+                      style: const TextStyle(
                         fontSize: 22,
                         fontFamily: 'Jaldi',
                         color: Colors.black,

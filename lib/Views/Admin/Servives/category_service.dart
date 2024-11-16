@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryService {
-  String baseUrl = 'http://192.168.1.21:5000';
+  String baseUrl = 'http://192.168.1.20:5000';
 
   CategoryService();
 

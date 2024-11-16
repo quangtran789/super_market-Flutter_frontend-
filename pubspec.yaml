@@ -48,7 +48,14 @@ flutter:
   assets:
     # - assets/payment_configuration.json
     - assets/images/
-    - assets/languages/
+    - assets/languages/en.json
+    - assets/languages/vi.json
+    - assets/languages/th.json
+    - assets/languages/ja.json
+    - assets/languages/zh.json
+    - assets/languages/pt.json
+    - assets/languages/ko.json
+    - assets/languages/fr.json
 
   fonts:
     - family: Jaldi
