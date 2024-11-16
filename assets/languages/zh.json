@@ -84,5 +84,10 @@
   "noAccessToAdmin": "您没有权限访问管理员！",
   "updateInfo": "更新信息",
   "update": "更新",
-  "changeLayout": "更改布局"
+  "changeLayout": "更改布局",
+  "pleaseLoginBeforeCheckout": "请先登录后再结算！",
+  "pleaseUpdateAddressBeforeCheckout": "请先更新地址后再结算！",
+  "orderSuccessful": "订单成功！",
+  "orderFailed": "订单失败！",
+  "errorWhilePlacingOrder": "下单时发生错误！"
 }

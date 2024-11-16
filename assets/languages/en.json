@@ -84,5 +84,10 @@
   "noAccessToAdmin": "You do not have access to Admin!",
   "updateInfo": "Update Information",
   "update": "Update",
-  "changeLayout": "Change Layout"
+  "changeLayout": "Change Layout",
+  "pleaseLoginBeforeCheckout": "Please login before checkout!",
+  "pleaseUpdateAddressBeforeCheckout": "Please update your address before checkout!",
+  "orderSuccessful": "Order placed successfully!",
+  "orderFailed": "Order placement failed!",
+  "errorWhilePlacingOrder": "An error occurred while placing the order!"
 }

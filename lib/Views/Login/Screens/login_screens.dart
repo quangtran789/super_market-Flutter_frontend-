@@ -99,7 +99,19 @@ class _LoginScreensState extends State<LoginScreens> {
                             prefixIcon: const Icon(Icons.lock_outline),
                             isPassword: true,
                           ),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
+                          const Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.black,
+                                  thickness: 1,
+                                  endIndent: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
                           CustomButton(
                             onButtonPressed: login, // Gọi hàm login
                             text: "Đăng nhập",
@@ -117,17 +129,6 @@ class _LoginScreensState extends State<LoginScreens> {
                             signUpText: "Tạo tài khoản",
                           ),
                           const SizedBox(height: 20),
-                          const Row(
-                            children: [
-                              Expanded(
-                                child: Divider(
-                                  color: Colors.black,
-                                  thickness: 1,
-                                  endIndent: 10,
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),

@@ -84,6 +84,11 @@
     "noAccessToAdmin": "Você não tem acesso ao Admin!",
     "updateInfo": "Atualizar informações",
     "update": "Atualizar",
-    "changeLayout": "Alterar layout"
+    "changeLayout": "Alterar layout",
+    "pleaseLoginBeforeCheckout": "Por favor, faça login antes de finalizar a compra!",
+    "pleaseUpdateAddressBeforeCheckout": "Por favor, atualize seu endereço antes de finalizar a compra!",
+    "orderSuccessful": "Pedido realizado com sucesso!",
+    "orderFailed": "Falha ao realizar o pedido!",
+    "errorWhilePlacingOrder": "Ocorreu um erro ao fazer o pedido!"
   }
   

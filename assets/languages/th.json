@@ -84,5 +84,10 @@
   "noAccessToAdmin": "คุณไม่มีสิทธิ์เข้าถึง Admin!",
   "updateInfo": "อัปเดตข้อมูล",
   "update": "อัปเดต",
-  "changeLayout": "เปลี่ยนรูปแบบ"
+  "changeLayout": "เปลี่ยนรูปแบบ",
+  "pleaseLoginBeforeCheckout": "กรุณาเข้าสู่ระบบก่อนชำระเงิน!",
+  "pleaseUpdateAddressBeforeCheckout": "กรุณาอัปเดตที่อยู่ก่อนชำระเงิน!",
+  "orderSuccessful": "สั่งซื้อสำเร็จ!",
+  "orderFailed": "การสั่งซื้อล้มเหลว!",
+  "errorWhilePlacingOrder": "เกิดข้อผิดพลาดในการสั่งซื้อ!"
 }

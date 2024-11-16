@@ -84,5 +84,10 @@
   "noAccessToAdmin": "Bạn không có quyền truy cập vào Admin!",
   "updateInfo": "Cập nhật thông tin",
   "update": "Cập nhật",
-  "changeLayout": "Thay đổi giao diện"
+  "changeLayout": "Thay đổi giao diện",
+  "pleaseLoginBeforeCheckout": "Vui lòng đăng nhập trước khi thanh toán!",
+  "pleaseUpdateAddressBeforeCheckout": "Vui lòng cập nhật địa chỉ trước khi thanh toán!",
+  "orderSuccessful": "Đặt hàng thành công!",
+  "orderFailed": "Đặt hàng thất bại!",
+  "errorWhilePlacingOrder": "Có lỗi xảy ra khi đặt hàng!"
 }

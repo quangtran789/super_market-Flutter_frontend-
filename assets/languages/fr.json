@@ -84,6 +84,11 @@
     "noAccessToAdmin": "Vous n'avez pas accès à l'Admin !",
     "updateInfo": "Mettre à jour les informations",
     "update": "Mettre à jour",
-    "changeLayout": "Changer de disposition"
+    "changeLayout": "Changer de disposition",
+    "pleaseLoginBeforeCheckout": "Veuillez vous connecter avant de passer à la caisse !",
+  "pleaseUpdateAddressBeforeCheckout": "Veuillez mettre à jour votre adresse avant de passer à la caisse !",
+  "orderSuccessful": "Commande réussie !",
+  "orderFailed": "Échec de la commande !",
+  "errorWhilePlacingOrder": "Une erreur est survenue lors de la commande !"
   }
   

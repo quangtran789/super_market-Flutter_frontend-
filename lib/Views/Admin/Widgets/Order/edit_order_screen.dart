@@ -137,8 +137,8 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                                       widget.orderId, _selectedStatus!);
                               if (success) {
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text('Cập nhật thành công'),
+                                    .showSnackBar( SnackBar(
+                                  content: Text(AppLocalizations.of(context)?.get('updateSuccess')??'Cập nhật thành công'),
                                   backgroundColor: Colors.green,
                                 ));
                               } else {
