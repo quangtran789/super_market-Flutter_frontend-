@@ -89,6 +89,7 @@
   "pleaseUpdateAddressBeforeCheckout": "결제하기 전에 주소를 업데이트해주세요!",
   "orderSuccessful": "주문이 성공적으로 완료되었습니다!",
   "orderFailed": "주문에 실패했습니다!",
-  "errorWhilePlacingOrder": "주문 중 오류가 발생했습니다!"
+  "errorWhilePlacingOrder": "주문 중 오류가 발생했습니다!",
+  "storeProducts": "매장 제품"
   }
   

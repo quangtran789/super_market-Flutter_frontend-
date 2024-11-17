@@ -89,5 +89,6 @@
   "pleaseUpdateAddressBeforeCheckout": "チェックアウトする前に住所を更新してください！",
   "orderSuccessful": "注文が正常に完了しました！",
   "orderFailed": "注文に失敗しました！",
-  "errorWhilePlacingOrder": "注文中にエラーが発生しました！"
+  "errorWhilePlacingOrder": "注文中にエラーが発生しました！",
+  "storeProducts": "店舗の製品"
 }

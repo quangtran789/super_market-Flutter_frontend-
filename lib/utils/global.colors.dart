@@ -27,11 +27,9 @@ class GlobalVariables {
   static const unselectedNavBarColor = Colors.black87;
   // STATIC IMAGES
   static const List<String> carouselImages = [
-    'https://img.freepik.com/free-photo/grapes-strawberries-pineapple-kiwi-apricot-banana-whole-pineapple_23-2147968680.jpg?t=st=1728916548~exp=1728920148~hmac=27890902a6c35c6793355ee7f24b1f9ebc25ef1b136d369bee3797c2f42405cb&w=900',
-    'https://img.freepik.com/free-photo/top-view-fresh-vegetables-composition-white-background_140725-76664.jpg?t=st=1728916599~exp=1728920199~hmac=45a91482f19b0421154414c2a73ed559853093453896efd10edd98195f827661&w=996',
-    'https://img.freepik.com/free-photo/cherry-drops-water-close-up-arrangement-berries-background-fresh-harvest-juicy-cherries-pie-juice-ingredient_166373-1607.jpg?t=st=1728916767~exp=1728920367~hmac=a92be3048764f5a248d53d88cfeaf66670f712cf022074beebb67117c9992eab&w=996',
-    'https://img.freepik.com/free-photo/front-view-delicious-shrimps_23-2148393704.jpg?t=st=1728917052~exp=1728920652~hmac=bff81ad069d5a534858dd5b667ce2637a58c8dbc6deb4cdd3ea8ced29ca77c83&w=996',
+    'https://img.freepik.com/free-vector/online-grocery-store-horizontal-banner_23-2150107228.jpg?t=st=1731838761~exp=1731842361~hmac=fb6fd225b8b2b2a1764743f01b7880c7a7576b3c873f8f8e23b479cce5b094d2&w=1060',
+    'https://img.freepik.com/free-vector/hand-drawn-supermarket-sale-background_23-2149406388.jpg?t=st=1731839241~exp=1731842841~hmac=516a60dd2cd55830c7825d941e296da0633b5004a0e8aee933c974420b53865d&w=1060',
+    'https://img.freepik.com/free-vector/hand-drawn-grocery-store-facebook-template_23-2151043919.jpg?t=st=1731839603~exp=1731843203~hmac=093a36addeaeefd426b2c029c8c7f58d1d6db00d0022a6cc0f2362fea3299773&w=1060',
+    'https://img.freepik.com/free-vector/flat-supermarket-social-media-post-template_23-2149357980.jpg?t=st=1731839651~exp=1731843251~hmac=565c5ef5b41f048c71931d6b37f48b0643ba2b561509ce046be22be9d26f02ba&w=996',
   ];
-
-  
 }

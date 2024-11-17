@@ -129,15 +129,18 @@ class _CartScreenState extends State<CartScreen> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(
-            content: Text(AppLocalizations.of(context)?.get('orderSuccessful')??'Đặt hàng thành công!'),
+          SnackBar(
+            content: Text(
+                AppLocalizations.of(context)?.get('orderSuccessful') ??
+                    'Đặt hàng thành công!'),
             backgroundColor: Colors.green,
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)?.get('orderFailed')??'Đặt hàng thất bại!'),
+            content: Text(AppLocalizations.of(context)?.get('orderFailed') ??
+                'Đặt hàng thất bại!'),
             backgroundColor: Colors.red,
           ),
         );
@@ -146,7 +149,9 @@ class _CartScreenState extends State<CartScreen> {
       print("Failed to create order: $error");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)?.get('errorWhilePlacingOrder')??'Có lỗi xảy ra khi đặt hàng!'),
+          content: Text(
+              AppLocalizations.of(context)?.get('errorWhilePlacingOrder') ??
+                  'Có lỗi xảy ra khi đặt hàng!'),
           backgroundColor: Colors.red,
         ),
       );
@@ -162,8 +167,9 @@ class _CartScreenState extends State<CartScreen> {
         discountValue = response['discountValue']; // Cập nhật giá trị giảm giá
       });
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-          content: Text(AppLocalizations.of(context)?.get('discountApplied')??'Mã giảm giá đã được áp dụng!'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)?.get('discountApplied') ??
+              'Mã giảm giá đã được áp dụng!'),
           backgroundColor: Colors.green,
         ),
       );
@@ -172,8 +178,10 @@ class _CartScreenState extends State<CartScreen> {
         discountValue = 0.0; // Reset discount value if code fails
       });
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-          content: Text(AppLocalizations.of(context)?.get('invalidDiscountCode')??'Mã giảm giá không hợp lệ!'),
+        SnackBar(
+          content: Text(
+              AppLocalizations.of(context)?.get('invalidDiscountCode') ??
+                  'Mã giảm giá không hợp lệ!'),
           backgroundColor: Colors.red,
         ),
       );
@@ -215,11 +223,15 @@ class _CartScreenState extends State<CartScreen> {
                   itemBuilder: (context, index) {
                     var item = cartItems[index];
                     return ListTile(
-                      leading: Image.network(
-                        item.product.imageUrl ?? '',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            8.0), // Set the radius for the corners
+                        child: Image.network(
+                          item.product.imageUrl ?? '',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       title: Text(item.product.name),
                       subtitle: Text(

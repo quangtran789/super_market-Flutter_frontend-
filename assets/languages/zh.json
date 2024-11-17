@@ -89,5 +89,6 @@
   "pleaseUpdateAddressBeforeCheckout": "请先更新地址后再结算！",
   "orderSuccessful": "订单成功！",
   "orderFailed": "订单失败！",
-  "errorWhilePlacingOrder": "下单时发生错误！"
+  "errorWhilePlacingOrder": "下单时发生错误 !",
+  "storeProducts": "商店的产品"
 }

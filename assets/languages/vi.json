@@ -89,5 +89,6 @@
   "pleaseUpdateAddressBeforeCheckout": "Vui lòng cập nhật địa chỉ trước khi thanh toán!",
   "orderSuccessful": "Đặt hàng thành công!",
   "orderFailed": "Đặt hàng thất bại!",
-  "errorWhilePlacingOrder": "Có lỗi xảy ra khi đặt hàng!"
+  "errorWhilePlacingOrder": "Có lỗi xảy ra khi đặt hàng!",
+  "storeProducts": "Sản phẩm của cửa hàng"
 }

@@ -89,6 +89,7 @@
     "pleaseUpdateAddressBeforeCheckout": "Por favor, atualize seu endereço antes de finalizar a compra!",
     "orderSuccessful": "Pedido realizado com sucesso!",
     "orderFailed": "Falha ao realizar o pedido!",
-    "errorWhilePlacingOrder": "Ocorreu um erro ao fazer o pedido!"
+    "errorWhilePlacingOrder": "Ocorreu um erro ao fazer o pedido!",
+    "storeProducts": "Produtos da loja"
   }
   
