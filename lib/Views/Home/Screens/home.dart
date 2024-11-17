@@ -379,7 +379,7 @@ class _HomeState extends State<Home> {
                                                       TextOverflow.ellipsis,
                                                 ),
                                                 Text(
-                                                  '${AppLocalizations.of(context)!.get('price')}: ${product.price} VND',
+                                                  '${product.price} VND',
                                                   style: const TextStyle(
                                                       fontSize: 14),
                                                 ),
