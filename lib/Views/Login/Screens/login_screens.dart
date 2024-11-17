@@ -66,8 +66,8 @@ class _LoginScreensState extends State<LoginScreens> {
                 padding: EdgeInsets.only(left: 10.0),
                 child: Image(
                   image: AssetImage('assets/images/pngaaa.com-15843.png'),
-                  width: 180,
-                  height: 180,
+                  width: 160,
+                  height: 160,
                 ),
               ),
               Padding(
@@ -100,6 +100,10 @@ class _LoginScreensState extends State<LoginScreens> {
                             isPassword: true,
                           ),
                           const SizedBox(height: 20),
+                          CustomButton(
+                            onButtonPressed: login, // Gọi hàm login
+                            text: "Đăng nhập",
+                          ),
                           const Row(
                             children: [
                               Expanded(
@@ -111,29 +115,47 @@ class _LoginScreensState extends State<LoginScreens> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
-                          CustomButton(
-                            onButtonPressed: login, // Gọi hàm login
-                            text: "Đăng nhập",
-                          ),
-                          const SizedBox(height: 20),
-                          CustomCreateaccount(
-                            onSignUpPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const RegisterScreen(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text('Bạn chưa có tài khoản?'),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterScreen(),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  "Tạo tài khoản",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.blue, // Màu sắc cho dòng chữ
+                                    decoration: TextDecoration.underline,
+                                    decorationColor:
+                                        Colors.blue, // Gạch chân dòng chữ
+                                  ),
                                 ),
-                              );
-                            },
-                            signUpText: "Tạo tài khoản",
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 20),
                         ],
                       ),
                     ),
                   ],
                 ),
+              ),
+              Image.asset(
+                'assets/images/background.png', // Hình ảnh bạn muốn thêm
+                width: 400, // Chiếm hết chiều rộng màn hình
+                height: 280, // Điều chỉnh chiều cao tùy ý
+                fit: BoxFit.cover, // Giúp hình ảnh không bị biến dạng
               ),
             ],
           ),

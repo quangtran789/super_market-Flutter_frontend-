@@ -59,7 +59,7 @@ class ProductDetailScreen extends StatelessWidget {
                   '${AppLocalizations.of(context)?.get('description')}\:  ${product.description ?? 'No description available'}'),
               const SizedBox(height: 8),
               Text(
-                '${AppLocalizations.of(context)?.get('price')}\:  ${product.price?.toStringAsFixed(2) ?? 'N/A'} VND',
+                '${AppLocalizations.of(context)?.get('price')}\: ${product.price.toStringAsFixed(3) ?? 'N/A'} VND',
                 style: const TextStyle(color: Colors.red, fontSize: 20),
               ),
               const SizedBox(height: 8),

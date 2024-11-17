@@ -90,5 +90,7 @@
   "orderSuccessful": "สั่งซื้อสำเร็จ!",
   "orderFailed": "การสั่งซื้อล้มเหลว!",
   "errorWhilePlacingOrder": "เกิดข้อผิดพลาดในการสั่งซื้อ!",
-  "storeProducts": "ผลิตภัณฑ์ของร้าน"
+  "storeProducts": "ผลิตภัณฑ์ของร้าน",
+  "cannotSearchProduct": "ไม่สามารถค้นหาผลิตภัณฑ์ได้",
+  "addedToCart": "สินค้าได้เพิ่มลงในรถเข็น"
 }

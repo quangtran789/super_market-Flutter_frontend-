@@ -62,29 +62,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<String?> getUserRole() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('role');
-  }
-
-  void navigateToAdmin() async {
-    String? role = await getUserRole();
-    if (role == 'admin') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AdminScreen()),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)?.get('noAccessToAdmin') ??
-              'Bạn không có quyền truy cập vào Admin!'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
   // Add product to cart method
   void _addToCart(BuildContext context, Product product) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -107,8 +84,9 @@ class _HomeState extends State<Home> {
     try {
       await cartService.addProductToCart(product.id, 1); // 1 is quantity
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Đã thêm sản phẩm vào giỏ hàng'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)?.get('addedToCart') ??
+              'Đã thêm sản phẩm vào giỏ hàng'),
           backgroundColor: Colors.green,
         ),
       );
@@ -173,32 +151,43 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Column(
+          title: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween, // Chia đều khoảng cách
             children: [
-              Text(
-                '${AppLocalizations.of(context)!.get('hello')}, $userName',
-                style: const TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'Jaldi',
-                    fontWeight: FontWeight.w400),
+              // Văn bản
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${AppLocalizations.of(context)!.get('hello')}, $userName',
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontFamily: 'Jaldi',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    AppLocalizations.of(context)?.get('whatDoYouWantToBuy') ??
+                        'Bạn muốn mua gì hôm nay?',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                AppLocalizations.of(context)?.get('whatDoYouWantToBuy') ??
-                    'Bạn muốn mua gì hôm nay?',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              // GIF bên phải
+              Image.asset(
+                'assets/images/robot.png', // Đường dẫn tới GIF
+                height: 56, // Điều chỉnh kích thước phù hợp
+                width: 56,
               ),
             ],
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: logout,
-            ),
-            IconButton(
-              icon: const Icon(Icons.admin_panel_settings),
-              onPressed: navigateToAdmin,
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -215,7 +204,6 @@ class _HomeState extends State<Home> {
                         labelText: AppLocalizations.of(context)
                                 ?.get('searchProduct') ??
                             'Tìm kiếm sản phẩm...',
-                        prefixIcon: const Icon(Icons.search),
                       ),
                     ),
                     IconButton(
@@ -379,7 +367,7 @@ class _HomeState extends State<Home> {
                                                       TextOverflow.ellipsis,
                                                 ),
                                                 Text(
-                                                  '${product.price} VND',
+                                                  '${product.price.toStringAsFixed(3)} VND',
                                                   style: const TextStyle(
                                                       fontSize: 14),
                                                 ),

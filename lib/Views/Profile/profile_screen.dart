@@ -1,4 +1,5 @@
 import 'package:app_supermarket/Services/auth_service.dart';
+import 'package:app_supermarket/Views/Admin/Screens/admin_screen.dart';
 import 'package:app_supermarket/Views/Login/Screens/login_screens.dart';
 import 'package:app_supermarket/Views/Profile/Widgets/update_user_info_screen.dart';
 import 'package:app_supermarket/Views/homepage.dart';
@@ -102,12 +103,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<String?> getUserRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('role');
+  }
+
+  void navigateToAdmin() async {
+    String? role = await getUserRole();
+    if (role == 'admin') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AdminScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)?.get('noAccessToAdmin') ??
+              'Bạn không có quyền truy cập vào Admin!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.get('userProfile') ??
-            'Hồ Sơ Người Dùng'),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/snooping.png', // Đường dẫn tới GIF
+              height: 40, // Điều chỉnh kích thước phù hợp
+              width: 40,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(AppLocalizations.of(context)?.get('userProfile') ??
+                'Hồ Sơ Người Dùng'),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.admin_panel_settings,
+              size: 40,
+            ),
+            onPressed: navigateToAdmin,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -119,9 +164,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const Center(
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.blue,
                     backgroundImage:
-                        AssetImage('assets/images/ww.png'), // Thay đổi màu nền
+                        AssetImage('assets/images/boy.png'), // Thay đổi màu nền
                     // Thêm hình nền nếu muốn
                   ),
                 ),

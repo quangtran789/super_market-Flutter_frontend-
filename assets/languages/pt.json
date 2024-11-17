@@ -90,6 +90,8 @@
     "orderSuccessful": "Pedido realizado com sucesso!",
     "orderFailed": "Falha ao realizar o pedido!",
     "errorWhilePlacingOrder": "Ocorreu um erro ao fazer o pedido!",
-    "storeProducts": "Produtos da loja"
+    "storeProducts": "Produtos da loja",
+    "cannotSearchProduct": "Não é possível pesquisar produtos",
+    "addedToCart": "Produto adicionado ao carrinho"
   }
   

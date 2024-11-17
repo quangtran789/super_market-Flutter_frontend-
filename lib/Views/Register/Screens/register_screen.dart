@@ -56,63 +56,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Đăng ký",
-                  style: TextStyle(fontFamily: 'Jaldi', fontSize: 36),
-                ),
-                const Text(
-                  'Hãy tạo tài khoản cho bạn!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
-                ),
-                const SizedBox(height: 35),
-                Form(
-                  child: Column(
-                    children: [
-                      CustomTextfield(
-                        controller: nameAccountController,
-                        labelText: 'Tên tài khoản',
-                        prefixIcon: const Icon(Icons.person_pin),
-                      ),
-                      const SizedBox(height: 15),
-                      CustomTextfield(
-                        controller: emailController,
-                        labelText: 'E-Mail',
-                        prefixIcon: const Icon(Icons.mail_outline),
-                      ),
-                      const SizedBox(height: 15),
-                      CustomTextfield(
-                        controller: passwordController,
-                        labelText: 'Password',
-                        prefixIcon: const Icon(Icons.lock_outline),
-                        isPassword: true,
-                      ),
-                      const SizedBox(height: 60),
-                      CustomButton(
-                        onButtonPressed: _register,
-                        text: "Đăng ký",
-                      ),
-                      const SizedBox(height: 20),
-                      const Row(
+          child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween, // Đưa các phần tử về hai đầu
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Đăng ký",
+                      style: TextStyle(fontFamily: 'Jaldi', fontSize: 36),
+                    ),
+                    const Text(
+                      'Hãy tạo tài khoản cho bạn!',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                    ),
+                    const SizedBox(height: 35),
+                    Form(
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.black,
-                              thickness: 1,
-                              endIndent: 10,
-                            ),
+                          CustomTextfield(
+                            controller: nameAccountController,
+                            labelText: 'Tên tài khoản',
+                            prefixIcon: const Icon(Icons.person_pin),
+                          ),
+                          const SizedBox(height: 15),
+                          CustomTextfield(
+                            controller: emailController,
+                            labelText: 'E-Mail',
+                            prefixIcon: const Icon(Icons.mail_outline),
+                          ),
+                          const SizedBox(height: 15),
+                          CustomTextfield(
+                            controller: passwordController,
+                            labelText: 'Password',
+                            prefixIcon: const Icon(Icons.lock_outline),
+                            isPassword: true,
+                          ),
+                          const SizedBox(height: 30),
+                          CustomButton(
+                            onButtonPressed: _register,
+                            text: "Đăng ký",
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 35),
+              // Hình ảnh nền ở dưới
+              Image.asset(
+                'assets/images/Illustration.png',
+                width: 230, // Chiều rộng toàn màn hình
+                height: 240, // Chiều cao hình ảnh
+                fit: BoxFit.cover, // Đảm bảo hình ảnh không bị méo
+              ),
+            ],
           ),
         ),
       ),

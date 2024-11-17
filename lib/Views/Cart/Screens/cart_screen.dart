@@ -97,8 +97,10 @@ class _CartScreenState extends State<CartScreen> {
 
       if (address == null || address.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Vui lòng cập nhật địa chỉ trước khi thanh toán!'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)
+                    ?.get('pleaseUpdateAddressBeforeCheckout') ??
+                'Vui lòng cập nhật địa chỉ trước khi thanh toán!'),
             backgroundColor: Colors.orange,
           ),
         );
@@ -210,14 +212,47 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.get('cart') ?? 'Giỏ Hàng'),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/shopping-bag.png', // Đường dẫn tới GIF
+              height: 40, // Điều chỉnh kích thước phù hợp
+              width: 40,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(AppLocalizations.of(context)?.get('cart') ?? 'Giỏ Hàng'),
+          ],
+        ),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : cartItems.isEmpty
               ? Center(
-                  child: Text(AppLocalizations.of(context)?.get('emptyCart') ??
-                      'Giỏ hàng trống'))
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)?.get('emptyCart') ??
+                            'Giỏ hàng trống',
+                        style: const TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 25),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Image.asset(
+                        'assets/images/bag.png', // Hình ảnh bạn muốn thêm
+                        width: 150, // Chiếm hết chiều rộng màn hình
+                        height: 150, // Điều chỉnh chiều cao tùy ý
+                        fit: BoxFit.cover, // Giúp hình ảnh không bị biến dạng
+                      ),
+                    ],
+                  ),
+                )
               : ListView.builder(
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
@@ -235,7 +270,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       title: Text(item.product.name),
                       subtitle: Text(
-                        'Số lượng: ${item.quantity} - Giá: ${item.product.price} VNĐ',
+                        '${AppLocalizations.of(context)?.get('quantity')}: ${item.quantity} \n${AppLocalizations.of(context)?.get('price')}: ${item.product.price.toStringAsFixed(3)} VNĐ',
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -288,7 +323,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Text(
-                  '${calculateTotalPrice().toStringAsFixed(2)} VNĐ',
+                  '${calculateTotalPrice().toStringAsFixed(3)} VNĐ',
                   style: const TextStyle(
                     fontSize: 25,
                     fontFamily: 'Jaldi',

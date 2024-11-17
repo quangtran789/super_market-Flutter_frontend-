@@ -35,7 +35,7 @@ class ProductDetailListScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                '${AppLocalizations.of(context)!.get('price')}: ${product.price.toStringAsFixed(2)} \VND',
+                '${AppLocalizations.of(context)!.get('price')}: ${product.price.toStringAsFixed(3)} \VND',
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 8),

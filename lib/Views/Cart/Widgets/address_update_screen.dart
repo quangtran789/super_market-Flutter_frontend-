@@ -85,48 +85,59 @@ class _AddressUpdateScreenState extends State<AddressUpdateScreen> {
         title: Text(AppLocalizations.of(context)?.get('updateAddress') ??
             'Cập nhật địa chỉ'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            if (currentAddress != null && currentAddress!.isNotEmpty) ...[
-              Text(
-                '${AppLocalizations.of(context)?.get('currentAddress')}: $currentAddress',
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              if (currentAddress != null && currentAddress!.isNotEmpty) ...[
+                Text(
+                  '${AppLocalizations.of(context)?.get('currentAddress')}: $currentAddress',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+              ],
+              TextField(
+                controller: _addressController,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.get('newAddress') ??
+                      'Địa chỉ mới',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  minimumSize: const Size(400, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: _updateAddress,
+                child: Text(
+                  AppLocalizations.of(context)?.get('updateAddress') ??
+                      'Cập nhật địa chỉ',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontFamily: 'Jaldi',
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              Image.asset(
+                'assets/images/home.png',
+                width: 300, // Chiều rộng toàn màn hình
+                height: 300, // Chiều cao hình ảnh
+                fit: BoxFit.cover, // Đảm bảo hình ảnh không bị méo
+              ),
             ],
-            TextField(
-              controller: _addressController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)?.get('newAddress') ??
-                    'Địa chỉ mới',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                minimumSize: const Size(400, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: _updateAddress,
-              child: Text(
-                AppLocalizations.of(context)?.get('updateAddress') ??
-                    'Cập nhật địa chỉ',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontFamily: 'Jaldi',
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

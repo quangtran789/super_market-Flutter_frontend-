@@ -90,5 +90,7 @@
   "orderSuccessful": "订单成功！",
   "orderFailed": "订单失败！",
   "errorWhilePlacingOrder": "下单时发生错误 !",
-  "storeProducts": "商店的产品"
+  "storeProducts": "商店的产品",
+  "cannotSearchProduct": "无法搜索产品",
+  "addedToCart": "产品已添加到购物车"
 }

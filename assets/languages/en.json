@@ -90,5 +90,7 @@
   "orderSuccessful": "Order placed successfully!",
   "orderFailed": "Order placement failed!",
   "errorWhilePlacingOrder": "An error occurred while placing the order!",
-  "storeProducts": "Store products"
+  "storeProducts": "Store products",
+  "cannotSearchProduct": "Unable to search for products",
+  "addedToCart": "Product added to cart"
 }

@@ -56,7 +56,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                   title: Text(
                       '${AppLocalizations.of(context)?.get('order')} ${order.id}'),
                   subtitle: Text(
-                      '${AppLocalizations.of(context)?.get('totalAmount')}\:  ${order.totalAmount} VND'),
+                      '${AppLocalizations.of(context)?.get('totalAmount')}\:  ${order.totalAmount.toStringAsFixed(3)} VND'),
                   trailing: Text(order.status),
                   onTap: () {
                     // Truyền đúng orderId vào UpdateOrderStatusPage

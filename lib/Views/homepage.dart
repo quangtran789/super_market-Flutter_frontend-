@@ -23,7 +23,7 @@ class _HomepageState extends State<Homepage> {
         builder: (context) {
           return Text(
             AppLocalizations.of(context)?.get('home') ??
-                'Danh sách danh mục', // Sử dụng bản dịch
+                'Trang chủ', // Sử dụng bản dịch
             style: const TextStyle(fontSize: 16),
           );
         },

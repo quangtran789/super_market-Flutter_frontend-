@@ -177,21 +177,32 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         ),
                       ),
                     ),
-                    title: Text(product
-                        .name), // Đúng cú pháp truy cập thuộc tính của Product
+                    title: Text(
+                      product.name,
+                      style: const TextStyle(fontSize: 20),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ), // Đúng cú pháp truy cập thuộc tính của Product
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${AppLocalizations.of(context)?.get('description')}\: ${product.description}', // Truy cập thuộc tính đúng của Product
-                          maxLines: 2,
+                          '${AppLocalizations.of(context)?.get('description')}\: ${product.description}',
+                          style: const TextStyle(
+                              fontSize:
+                                  16), // Truy cập thuộc tính đúng của Product
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                            '${AppLocalizations.of(context)?.get('price')}\: ${product.price.toStringAsFixed(2)}\ VND'), // Truy cập thuộc tính đúng của Product
-                        Text(
-                          '${AppLocalizations.of(context)!.get('category')} \ID: ${product.categoryId}',
+                          '${AppLocalizations.of(context)?.get('price')}\: ${product.price.toStringAsFixed(3)}\ VND',
                           style: const TextStyle(fontSize: 16),
+                        ), // Truy cập thuộc tính đúng của Product
+                        Text(
+                          '${AppLocalizations.of(context)!.get('category')} \ID: ${product.categoryId},',
+                          style: const TextStyle(fontSize: 16),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         // Truy cập thuộc tính đúng của Product
                       ],

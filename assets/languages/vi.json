@@ -90,5 +90,7 @@
   "orderSuccessful": "Đặt hàng thành công!",
   "orderFailed": "Đặt hàng thất bại!",
   "errorWhilePlacingOrder": "Có lỗi xảy ra khi đặt hàng!",
-  "storeProducts": "Sản phẩm của cửa hàng"
+  "storeProducts": "Sản phẩm của cửa hàng",
+  "addedToCart": "Đã thêm sản phẩm vào giỏ hàng"
+  
 }

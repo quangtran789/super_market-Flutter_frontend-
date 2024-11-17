@@ -55,17 +55,37 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Mã đơn hàng
-                  Text(
-                      '${AppLocalizations.of(context)?.get('orderNumber')}\:  ${_order!.id}',
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold)),
-
-                  // Địa chỉ giao hàng
-                  const SizedBox(height: 10),
-                  Text(
-                      '${AppLocalizations.of(context)?.get('address')}\:  ${_order!.address ?? 'Không có địa chỉ'}',
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold)),
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      border: Border.all(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // Align text to the start
+                      children: [
+                        Text(
+                          '${AppLocalizations.of(context)?.get('orderNumber')}:  ${_order!.id}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                            height:
+                                10), // Space between order number and address
+                        Text(
+                          '${AppLocalizations.of(context)?.get('address')}:  ${_order!.address ?? 'Không có địa chỉ'}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   const SizedBox(height: 20),
                   Text(
@@ -89,7 +109,7 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                                 : Icon(Icons.image, size: 50),
                             title: Text(item.name), // Hiển thị tên sản phẩm
                             subtitle: Text(
-                                '${AppLocalizations.of(context)?.get('quantity')}\: ${item.quantity}, \| ${AppLocalizations.of(context)?.get('price')}\: ${item.price}'),
+                                '${AppLocalizations.of(context)?.get('quantity')}\: ${item.quantity}, \n${AppLocalizations.of(context)?.get('price')}\: ${item.price.toStringAsFixed(3)}'),
                           ),
                         );
                       },
@@ -137,8 +157,10 @@ class _UpdateOrderStatusPageState extends State<UpdateOrderStatusPage> {
                                       widget.orderId, _selectedStatus!);
                               if (success) {
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar( SnackBar(
-                                  content: Text(AppLocalizations.of(context)?.get('updateSuccess')??'Cập nhật thành công'),
+                                    .showSnackBar(SnackBar(
+                                  content: Text(AppLocalizations.of(context)
+                                          ?.get('updateSuccess') ??
+                                      'Cập nhật thành công'),
                                   backgroundColor: Colors.green,
                                 ));
                               } else {

@@ -90,6 +90,9 @@
   "orderSuccessful": "주문이 성공적으로 완료되었습니다!",
   "orderFailed": "주문에 실패했습니다!",
   "errorWhilePlacingOrder": "주문 중 오류가 발생했습니다!",
-  "storeProducts": "매장 제품"
+  "storeProducts": "매장 제품",
+  "cannotSearchProduct": "제품을 검색할 수 없습니다",
+  "addedToCart": "상품이 장바구니에 추가되었습니다"
+  
   }
   
