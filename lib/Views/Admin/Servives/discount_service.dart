@@ -69,4 +69,27 @@ class DiscountService {
       throw Exception('Failed to create discount code');
     }
   }
+
+  // Xóa mã giảm giá theo ID
+  Future<void> deleteDiscountCode(String id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl/discount-codes/$id'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        print('Discount code deleted successfully');
+      } else if (response.statusCode == 404) {
+        throw Exception('Discount code not found');
+      } else {
+        throw Exception('Failed to delete discount code');
+      }
+    } catch (error) {
+      throw Exception('Error deleting discount code: $error');
+    }
+  }
 }

@@ -36,12 +36,51 @@ class _DiscountCodeListScreenState extends State<DiscountCodeListScreen> {
     }
   }
 
+  // Hàm xóa mã giảm giá
+  Future<void> deleteDiscountCode(String id, int index) async {
+    bool confirm = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)?.get('delete') ?? 'Xóa mã giảm giá'),
+          content: Text(AppLocalizations.of(context)?.get('confirmDelete') ?? 'Bạn có chắc chắn muốn xóa mã giảm giá này?'),
+          actions: [
+            TextButton(
+              child: Text(AppLocalizations.of(context)?.get('cancel') ?? 'Hủy'),
+              onPressed: () => Navigator.of(context).pop(false),
+            ),
+            TextButton(
+              child: Text(AppLocalizations.of(context)?.get('delete') ?? 'Xóa'),
+              onPressed: () => Navigator.of(context).pop(true),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirm) {
+      try {
+        DiscountService discountService = DiscountService();
+        await discountService.deleteDiscountCode(id);
+        setState(() {
+          discountCodes.removeAt(index);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)?.get('deletedSuccessfully') ?? 'Đã xóa mã giảm giá thành công!')),
+        );
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)?.get('deleteFailed') ?? 'Xóa thất bại: $error')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.get('discountList') ??
-            'Danh Sách Mã Giảm Giá'),
+        title: Text(AppLocalizations.of(context)?.get('discountList') ?? 'Danh Sách Mã Giảm Giá'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -77,6 +116,10 @@ class _DiscountCodeListScreenState extends State<DiscountCodeListScreen> {
                       title: Text(discountCode.code),
                       subtitle: Text(
                         '${AppLocalizations.of(context)?.get('value')}: ${discountCode.discountValue} VNĐ - ${discountCode.isValid ? AppLocalizations.of(context)?.get('valid') : AppLocalizations.of(context)?.get('invalid')}',
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: Colors.red),
+                        onPressed: () => deleteDiscountCode(discountCode.id, index),
                       ),
                     );
                   },
