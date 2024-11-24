@@ -1,4 +1,3 @@
-import 'package:app_supermarket/Views/Admin/Screens/admin_screen.dart';
 import 'package:app_supermarket/Views/Admin/Servives/category_service.dart';
 import 'package:app_supermarket/Views/Admin/Servives/product_service.dart';
 import 'package:app_supermarket/Views/Cart/Services/cart_service.dart';

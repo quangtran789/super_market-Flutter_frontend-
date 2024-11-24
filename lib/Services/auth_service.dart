@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  String baseUrl = 'http://192.168.1.20:5000';
+  String baseUrl = 'http://192.168.1.23:5000';
   AuthService();
 
   Future<bool> register(String name, String email, String password) async {
@@ -181,7 +181,7 @@ class AuthService {
     return prefs.getString('token');
   }
 
-    // Cập nhật thông tin người dùng (name, email)
+  // Cập nhật thông tin người dùng (name, email)
   Future<Map<String, dynamic>> updateUserInfo(String name, String email) async {
     final token = await _getToken();
 
@@ -193,7 +193,8 @@ class AuthService {
     }
 
     final response = await http.put(
-      Uri.parse('$baseUrl/api/users/update-info'), // Cập nhật thông tin người dùng
+      Uri.parse(
+          '$baseUrl/api/users/update-info'), // Cập nhật thông tin người dùng
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -223,5 +224,4 @@ class AuthService {
       };
     }
   }
-
 }

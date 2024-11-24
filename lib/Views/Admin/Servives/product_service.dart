@@ -3,7 +3,7 @@ import 'package:app_supermarket/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
-  String baseUrl = 'http://192.168.1.20:5000/api/products';
+  String baseUrl = 'http://192.168.1.23:5000/api/products';
 
   // Lấy danh sách sản phẩm
   Future<List<Product>> getProducts() async {
